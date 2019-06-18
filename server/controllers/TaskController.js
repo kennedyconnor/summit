@@ -10,6 +10,9 @@ export default class TaskController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('', this.getAllTasks)
+      .get('/:id', this.getTaskById)
+      .get('/tags/:id', this.getTaskByTag)
+      .post('', this.createTask)
       .delete('/:id', this.deleteTask)
       .use(this.defaultRoute)
   }
@@ -22,6 +25,27 @@ export default class TaskController {
     try {
       let data = await _repo.find({})
       return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async getTaskById(req, res, next) {
+    try {
+      let data = await _repo.find({ _id: req.params.id })
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async getTaskByTag(req, res, next) {
+    try {
+      let data = await _repo.find({ tags: { $in: [req.params.id] } })
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async createTask(req, res, next) {
+    try {
+      let data = await _repo.create(req.body)
+      return res.status(201).send(data)
     } catch (error) { next(error) }
   }
 

@@ -32,9 +32,12 @@ server.use(bp.urlencoded({
 //REGISTER YOUR SESSION, OTHERWISE YOU WILL NEVER GET LOGGED IN
 import Session from "./middleware/session"
 import AuthController from './controllers/AuthController'
+import TaskController from './controllers/TaskController';
 
 server.use(new Session().express)
 server.use('/auth', new AuthController().router)
+server.use('/tasks', new TaskController().router)
+
 
 
 
