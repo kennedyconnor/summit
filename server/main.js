@@ -33,12 +33,12 @@ server.use(bp.urlencoded({
 import Session from "./middleware/session"
 import AuthController from './controllers/AuthController'
 import TaskController from './controllers/TaskController';
+import GoalController from './controllers/GoalController';
 
 server.use(new Session().express)
 server.use('/auth', new AuthController().router)
 server.use('/tasks', new TaskController().router)
-
-
+server.use('/goals', new GoalController().router)
 
 
 //Default Error Handler

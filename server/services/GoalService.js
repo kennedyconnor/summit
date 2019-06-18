@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import TasksService from './TasksService'
+import TaskService from './TaskService'
 
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
