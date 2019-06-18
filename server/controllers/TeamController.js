@@ -10,11 +10,10 @@ export default class TeamController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('', this.getAllTeams)
-      .get('/:id/user', this.getTeamMembers)
+      .get('/:id', this.getTeamById)
       .post('', this.createTeam)
-      .put('/:id/user/:id', this.addMember) //double check this
+      .put('/:id', this.editTeam) //double check this
       .delete('/:id', this.deleteTeam)
-      .delete('/:id/user/:id', this.leaveTeam) //double check this
       .use(this.defaultRoute)
   }
 
@@ -29,9 +28,11 @@ export default class TeamController {
     } catch (error) { next(error) }
   }
 
-  async getTeamMembers(req, res, next) {
+  async getTeamById(req, res, next) {
     try {
-      let data = await _repo.find({ _id: req.params.id, userId: req.session.uid })
+      let data = await _repo.find({ _id: req.params.id })
+        .populate({ path: 'users', select: 'name' })
+
       return res.send(data)
     } catch (error) { next(error) }
   }
@@ -44,25 +45,20 @@ export default class TeamController {
     } catch (error) { next(error) }
   }
 
-  async addMember(req, res, next) {
+  async editTeam(req, res, next) {
     try {
-      let team = await _repo.findOneAndUpdate(req.params.id, req.body).populate('team')
+      let team = await _repo.findOneAndUpdate(req.params.id, req.body)
       return res.send(team)
     } catch (error) { next(error) }
   }
 
   async deleteTeam(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, userId: req.session.uid })
+      await _repo.findOneAndRemove({ _id: req.params.id })
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }
 
-  async leaveTeam(req, res, next) {
-    try {
-      await _repo.findOneAndRemove({ _id: req.params.id, userId: req.session.uid })
-      return res.send("Successfully deleted")
-    } catch (error) { next(error) }
-  }
+
 
 }

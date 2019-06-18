@@ -34,11 +34,13 @@ import Session from "./middleware/session"
 import AuthController from './controllers/AuthController'
 import TaskController from './controllers/TaskController';
 import GoalController from './controllers/GoalController';
+import TeamController from './controllers/TeamController';
 
 server.use(new Session().express)
 server.use('/auth', new AuthController().router)
-server.use('/tasks', new TaskController().router)
-server.use('/goals', new GoalController().router)
+server.use('/api/tasks', new TaskController().router)
+server.use('/api/goals', new GoalController().router)
+server.use('/api/teams', new TeamController().router)
 
 
 //Default Error Handler

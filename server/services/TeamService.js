@@ -4,8 +4,8 @@ import UserService from './UserService'
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 
-let _schema = new mongoose.schema({
-  user: [{ type: ObjectId, ref: "user" }]
+let _schema = new mongoose.Schema({
+  users: [{ type: ObjectId, ref: 'User' }]
 })
 
 export default class TeamService {
