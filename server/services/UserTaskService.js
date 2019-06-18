@@ -13,8 +13,8 @@ let _schema = new mongoose.Schema({
   // recurring: { type: Boolean }
 })
 
-export default class UserTasksService {
+export default class UserTaskService {
   get repository() {
-    return mongoose.model('UserTasksService', _schema)
+    return mongoose.model('UserTaskService', _schema)
   }
 }
