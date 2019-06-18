@@ -10,6 +10,8 @@ export default class GoalController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('', this.getAllGoals)
+      .get('/:id', this.getGoalById)
+      .post('', this.createGoal)
       .put('/:id/task/:id', this.editGoal) //double check put/delete
       .delete('/:id/task/:id', this.deleteTask)
       .delete('/:id', this.deleteGoal)
@@ -23,6 +25,20 @@ export default class GoalController {
     try {
       let data = await _repo.find({})
       return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async getGoalById(req, res, next) {
+    try {
+      let data = await _repo.find({ _id: req.params.id })
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async createGoal(req, res, next) {
+    try {
+      let data = await _repo.create(req.body)
+      return res.status(201).send(data)
     } catch (error) { next(error) }
   }
 
