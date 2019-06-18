@@ -12,7 +12,7 @@ export default class GoalController {
       .get('', this.getAllGoals)
       .get('/:id', this.getGoalById)
       .post('', this.createGoal)
-      .put('/:id/task/:id', this.editGoal) //double check put/delete
+      .put('/:id/', this.editGoal) //double check put/delete
       .delete('/:id/task/:id', this.deleteTask)
       .delete('/:id', this.deleteGoal)
       .use(this.defaultRoute)
