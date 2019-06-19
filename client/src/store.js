@@ -22,7 +22,8 @@ export default new Vuex.Store({
     user: {},
     tasks: [],
     goals: [],
-    userTasks: []
+    userTasks: [],
+    tags: ["Health", "Organization", "Hygiene", "Finances"] //may move the tags in store.state into data if it is only referenced by the tasks component
   },
   mutations: {
     setUser(state, user) {
@@ -52,7 +53,10 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'home' }) //add some conditionals to prevent unwanted redirects
+          // debugger
+          if (router.currentRoute.name == 'login') {
+            router.push({ name: 'home' })
+          } //add some conditionals to prevent unwanted redirects
 
         })
         .catch(res => {
@@ -80,5 +84,17 @@ export default new Vuex.Store({
       } catch (error) { console.error(error) }
     },
     //#endregion
+
+
+    //#region -- TASKS
+
+    async getAllTasks({ commit, dispatch }) {
+      let res = await api.get('tasks')
+      console.log('Getting all tasks', res.data)
+      commit('setTasks', res.data)
+    }
+
+    //#endregion
   }
+
 })
