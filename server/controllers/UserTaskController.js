@@ -1,15 +1,16 @@
-import expess from 'express'
+import express from 'express'
 import UserTaskService from '../services/UserTaskService'
 
 let _service = new UserTaskService()
 let _repo = _service.repository
 
-export default class UserTaskService {
+export default class UserTaskController {
   constructor() {
     this.router = express.Router()
       .get('', this.getAllUserTasks)
       .get('/:id', this.getUserTaskById)
       //get usertask by date? this would populate on the main page
+      .get('/users/:id', this.getUserTaskByUserId)
       .post('', this.createUserTask)
       .put('/:id', this.editUserTask)
       .delete('/:id', this.deleteUserTask)
@@ -33,6 +34,15 @@ export default class UserTaskService {
     } catch (error) { next(error) }
   }
 
+  async getUserTaskByUserId(req, res, next) {
+    try {
+      let data = await _repo.find({ userId: req.params.id })
+        .populate('userId')
+        .populate('taskId')
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
   async createUserTask(req, res, next) {
     try {
       let data = await _repo.create(req.body)
@@ -49,7 +59,7 @@ export default class UserTaskService {
 
   async deleteUserTask(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      await _repo.findOneAndRemove({ _id: req.params.id })
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }

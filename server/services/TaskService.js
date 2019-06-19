@@ -11,6 +11,6 @@ let _schema = new mongoose.Schema({
 
 export default class TaskService {
   get repository() {
-    return mongoose.model('task', _schema)
+    return mongoose.model('Task', _schema)
   }
 }

@@ -6,8 +6,8 @@ let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 
 let _schema = new mongoose.Schema({
-  taskId: { type: ObjectId, ref: "task", required: true },
-  userId: { type: ObjectId, ref: "user", required: true },
+  taskId: { type: ObjectId, ref: "Task", required: true },
+  userId: { type: ObjectId, ref: "User", required: true },
   completed: { type: Boolean, required: true, default: false },
   day: { type: String, required: true },
   // recurring: { type: Boolean }

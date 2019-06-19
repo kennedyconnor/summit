@@ -32,7 +32,6 @@ export default class TeamController {
     try {
       let data = await _repo.find({ _id: req.params.id })
         .populate({ path: 'users', select: 'name' })
-
       return res.send(data)
     } catch (error) { next(error) }
   }
@@ -47,7 +46,8 @@ export default class TeamController {
 
   async editTeam(req, res, next) {
     try {
-      let team = await _repo.findOneAndUpdate(req.params.id, req.body)
+      let team = await _repo.findOneAndUpdate(req.params.id, req.body, { new: true }) //We will be using push and splice to edit the team array and remember to return new array.  
+      //Make sure to return the body of the Array
       return res.send(team)
     } catch (error) { next(error) }
   }
