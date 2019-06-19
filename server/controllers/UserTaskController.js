@@ -10,6 +10,7 @@ export default class UserTaskController {
       .get('', this.getAllUserTasks)
       .get('/:id', this.getUserTaskById)
       //get usertask by date? this would populate on the main page
+      .get('/users/:id', this.getUserTaskByUserId)
       .post('', this.createUserTask)
       .put('/:id', this.editUserTask)
       .delete('/:id', this.deleteUserTask)
@@ -33,6 +34,15 @@ export default class UserTaskController {
     } catch (error) { next(error) }
   }
 
+  async getUserTaskByUserId(req, res, next) {
+    try {
+      let data = await _repo.find({ userId: req.params.id })
+        .populate('userId')
+        .populate('taskId')
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
   async createUserTask(req, res, next) {
     try {
       let data = await _repo.create(req.body)
@@ -49,7 +59,7 @@ export default class UserTaskController {
 
   async deleteUserTask(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      await _repo.findOneAndRemove({ _id: req.params.id })
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }

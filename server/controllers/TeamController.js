@@ -32,7 +32,6 @@ export default class TeamController {
     try {
       let data = await _repo.find({ _id: req.params.id })
         .populate({ path: 'users', select: 'name' })
-
       return res.send(data)
     } catch (error) { next(error) }
   }
