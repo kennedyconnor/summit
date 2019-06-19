@@ -35,12 +35,14 @@ import AuthController from './controllers/AuthController'
 import TaskController from './controllers/TaskController';
 import GoalController from './controllers/GoalController';
 import TeamController from './controllers/TeamController';
+import UserTaskController from './controllers/UserTaskController';
 
 server.use(new Session().express)
 server.use('/auth', new AuthController().router)
 server.use('/api/tasks', new TaskController().router)
 server.use('/api/goals', new GoalController().router)
 server.use('/api/teams', new TeamController().router)
+server.use('/api/usertasks', new UserTaskController().router)
 
 
 //Default Error Handler

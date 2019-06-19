@@ -1,10 +1,10 @@
-import expess from 'express'
+import express from 'express'
 import UserTaskService from '../services/UserTaskService'
 
 let _service = new UserTaskService()
 let _repo = _service.repository
 
-export default class UserTaskService {
+export default class UserTaskController {
   constructor() {
     this.router = express.Router()
       .get('', this.getAllUserTasks)
