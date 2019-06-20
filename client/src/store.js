@@ -92,7 +92,14 @@ export default new Vuex.Store({
       let res = await api.get('tasks')
       console.log('Getting all tasks', res.data)
       commit('setTasks', res.data)
-    }
+    },
+
+    async addUserTask({ commit, dispatch }, task) {
+      try {
+        let res = await api.post('/usertasks', task)
+        console.log("Posted User Task: ", res)
+      } catch (error) { console.error(error) }
+    },
 
     //#endregion
   }
