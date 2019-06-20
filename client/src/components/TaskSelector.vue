@@ -23,7 +23,7 @@
 <script>
   export default {
     name: "TaskSelector",
-    props: ["taskData"],
+    props: ["taskData", "reset"],
     data() {
       return {
         days: [],
@@ -37,21 +37,19 @@
     watch: {
       days: function (newDays, old) {
         this.$store.dispatch('newUserTask', { id: this.taskData._id, days: newDays })
+      },
+      reset: function () {
+        this.days = []
       }
     },
-    computed: {
-      pendingDays() {
-        // this.days = this.$store.state.pendingUserTasks[this.taskData._id]
-        // return this.$store.state.pendingUserTasks
-      }
-    },
+
     methods: {
-      addUserTasks() {
-        this.days.forEach(dayString => {
-          this.newUserTask.instances.push({ day: dayString })
-        })
-        this.$store.dispatch('addUserTask', this.newUserTask);
-      }
+      // addUserTasks() {
+      //   this.days.forEach(dayString => {
+      //     this.newUserTask.instances.push({ day: dayString })
+      //   })
+      //   this.$store.dispatch('addUserTask', this.newUserTask);
+      // }
     },
     components: {}
   }

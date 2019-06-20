@@ -33,13 +33,14 @@
           </div>
 
           <form class="modal-body">
-            <taskSelector v-for="task in tasksByTag" :taskData="task" :key="task._id" />
+            <taskSelector v-for="task in tasksByTag" :taskData="task" :reset="reset" :key="task._id" />
           </form>
 
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="saveUserTasks">Save to Week</button>
+            <button type="button" class="btn btn-primary" @click="saveUserTasks">Save to
+              Week</button>
           </div>
         </div>
       </div>
@@ -61,6 +62,7 @@
       return {
         tasksByTag: [],
         filter: '',
+        reset: 0
       }
     },
     watch: {
@@ -104,6 +106,7 @@
           })
           this.$store.dispatch('addUserTask', JSON.parse(JSON.stringify(data)))
         }
+        this.reset++
         $("#taskDetails").modal("hide");
         $(".modal-backdrop").remove();
       }
