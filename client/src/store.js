@@ -23,6 +23,7 @@ export default new Vuex.Store({
     tasks: [],
     goals: [],
     userTasks: [],
+    pendingUserTasks: {},  //or emit an event- child calling parent
     tags: ["Health", "Organization", "Hygiene", "Finances"] //may move the tags in store.state into data if it is only referenced by the tasks component
   },
   mutations: {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     setUserTasks(state, userTasks) {
       state.userTasks = userTasks
+    },
+    setPendingUserTask(state, pendingTask) {
+      Vue.set(state.pendingUserTasks, pendingTask.id, pendingTask.days)
     }
   },
 
@@ -94,6 +98,11 @@ export default new Vuex.Store({
       commit('setTasks', res.data)
     },
 
+    newUserTask({ commit, dispatch }, task) {
+      commit('setPendingUserTask', task)
+    },
+
+    //this is to send pending tasks to database
     async addUserTask({ commit, dispatch }, task) {
       try {
         let res = await api.post('/usertasks', task)

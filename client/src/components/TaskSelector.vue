@@ -1,7 +1,9 @@
 <template>
   <div class="taskSelector">
     <li>
-      {{taskData.title}} <br> {{taskData.description}} -- {{taskData.points}} <br>
+      <h4>{{taskData.title}}</h4>
+      <h5>{{taskData.description}}</h5>
+      <p>{{taskData.points}} points</p>
       <label class="checkbox-inline"><input type="checkbox" name="Sunday" value="Sunday" v-model="days">Sun</label>
       <label class="checkbox-inline"><input type="checkbox" name="Monday" value="Monday" v-model="days">Mon</label>
       <label class="checkbox-inline"><input type="checkbox" name="Tuesday" value="Tuesday" v-model="days">Tues</label>
@@ -11,8 +13,10 @@
       <label class="checkbox-inline"><input type="checkbox" name="Friday" value="Friday" v-model="days">Fri</label>
       <label class="checkbox-inline"><input type="checkbox" name="Saturday" value="Saturday" v-model="days">Sat</label>
     </li>
-    <br>
+    <!-- <br>
     <button @click.prevent="addUserTasks">Add Tasks</button>
+    <br> -->
+    <hr>
   </div>
 </template>
 
@@ -30,7 +34,17 @@
         }
       }
     },
-    computed: {},
+    watch: {
+      days: function (newDays, old) {
+        this.$store.dispatch('newUserTask', { id: this.taskData._id, days: newDays })
+      }
+    },
+    computed: {
+      pendingDays() {
+        // this.days = this.$store.state.pendingUserTasks[this.taskData._id]
+        // return this.$store.state.pendingUserTasks
+      }
+    },
     methods: {
       addUserTasks() {
         this.days.forEach(dayString => {
@@ -42,3 +56,12 @@
     components: {}
   }
 </script>
+<style scoped>
+  .taskSelector {
+    list-style-type: none;
+  }
+
+  .checkbox-inline {
+    padding-left: 5px;
+  }
+</style>
