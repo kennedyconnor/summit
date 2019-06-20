@@ -35,7 +35,7 @@ export default new Vuex.Store({
     setGoals(state, goals) {
       state.goals = goals
     },
-    setUseTasks(state, userTasks) {
+    setUserTasks(state, userTasks) {
       state.userTasks = userTasks
     }
   },
@@ -98,6 +98,15 @@ export default new Vuex.Store({
       try {
         let res = await api.post('/usertasks', task)
         console.log("Posted User Task: ", res)
+      } catch (error) { console.error(error) }
+    },
+
+    async getUserTasksByUserId({ commit, dispatch }, userId) {
+      try {
+
+        let res = await api.get('/usertasks/users/' + userId)
+        console.log("Get user tasks by user: ", res.data)
+        commit('setUserTasks', res.data)
       } catch (error) { console.error(error) }
     },
 

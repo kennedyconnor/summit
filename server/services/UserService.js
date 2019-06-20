@@ -13,7 +13,7 @@ let _schema = new Schema({
   icon: { type: String },
   points: { type: Number, required: true, default: 0 },
   level: { type: Number, required: true, default: 0 },
-  summits: [{ type: Number, required: true, default: 0 }, { type: Number, required: true, default: 0 }]
+  summits: [{ type: Number, required: true, default: 0 }]
 }, { timestamps: true })
 
 //schema.methods are used to add a method to a Model instance
