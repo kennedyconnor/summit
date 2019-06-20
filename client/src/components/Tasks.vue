@@ -32,15 +32,14 @@
             </button>
           </div>
 
-
-          <form class="modal-body" @submit.prevent="addTask(e)">
+          <form class="modal-body">
             <taskSelector v-for="task in tasksByTag" :taskData="task" :key="task._id" />
           </form>
 
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save to Week</button>
+            <button type="button" class="btn btn-primary" @click="saveUserTasks">Save to Week</button>
           </div>
         </div>
       </div>
@@ -66,7 +65,7 @@
     },
     watch: {
       filter: function (tag) {
-        //run the filster to set tasksByTag
+        //run the filter to set tasksByTag
         this.filterTasks(tag)
       }
     },
@@ -90,17 +89,26 @@
         this.$store.dispatch('addUserTask', task)
       },
 
-      addTask(e) {
-        e.preventDefault()
-        let form = e.target
-        for (let i = 0; i < form.length; i++) {
-          let input = form[i]
-          if (input.type == 'checkbox' && input.checked) {
-            userTask.day = input.name
+      saveUserTasks() {
+        let tasks = this.$store.state.pendingUserTasks
+        let userId = this.$store.state.user._id
+        for (const taskId in tasks) {
+          const instances = tasks[taskId]
+          let data = {
+            userId,
+            taskId,
+            instances
           }
+          data.instances = data.instances.map(d => {
+            return { day: d }
+          })
+          this.$store.dispatch('addUserTask', JSON.parse(JSON.stringify(data)))
         }
+        $("#taskDetails").modal("hide");
+        $(".modal-backdrop").remove();
       }
     },
+
     components: {
       TaskSelector
     }

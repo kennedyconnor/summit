@@ -13,9 +13,9 @@
       <label class="checkbox-inline"><input type="checkbox" name="Friday" value="Friday" v-model="days">Fri</label>
       <label class="checkbox-inline"><input type="checkbox" name="Saturday" value="Saturday" v-model="days">Sat</label>
     </li>
-    <br>
+    <!-- <br>
     <button @click.prevent="addUserTasks">Add Tasks</button>
-    <br>
+    <br> -->
     <hr>
   </div>
 </template>
@@ -34,7 +34,17 @@
         }
       }
     },
-    computed: {},
+    watch: {
+      days: function (newDays, old) {
+        this.$store.dispatch('newUserTask', { id: this.taskData._id, days: newDays })
+      }
+    },
+    computed: {
+      pendingDays() {
+        // this.days = this.$store.state.pendingUserTasks[this.taskData._id]
+        // return this.$store.state.pendingUserTasks
+      }
+    },
     methods: {
       addUserTasks() {
         this.days.forEach(dayString => {
@@ -46,7 +56,7 @@
     components: {}
   }
 </script>
-<style>
+<style scoped>
   .taskSelector {
     list-style-type: none;
   }
