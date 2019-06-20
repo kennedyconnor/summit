@@ -107,6 +107,7 @@
           this.$store.dispatch('addUserTask', JSON.parse(JSON.stringify(data)))
         }
         this.reset++
+        tasks = {}
         $("#taskDetails").modal("hide");
         $(".modal-backdrop").remove();
       }

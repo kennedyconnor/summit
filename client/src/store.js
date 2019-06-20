@@ -114,7 +114,7 @@ export default new Vuex.Store({
       try {
 
         let res = await api.get('/usertasks/users/' + userId)
-        console.log("Get user tasks by user: ", res.data)
+       // console.log("Get user tasks by user: ", res.data)
         commit('setUserTasks', res.data)
       } catch (error) { console.error(error) }
     },
