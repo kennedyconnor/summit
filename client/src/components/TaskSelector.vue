@@ -1,7 +1,9 @@
 <template>
   <div class="taskSelector">
     <li>
-      {{taskData.title}} <br> {{taskData.description}} -- {{taskData.points}} <br>
+      <h4>{{taskData.title}}</h4>
+      <h5>{{taskData.description}}</h5>
+      <p>{{taskData.points}} points</p>
       <label class="checkbox-inline"><input type="checkbox" name="Sunday" value="Sunday" v-model="days">Sun</label>
       <label class="checkbox-inline"><input type="checkbox" name="Monday" value="Monday" v-model="days">Mon</label>
       <label class="checkbox-inline"><input type="checkbox" name="Tuesday" value="Tuesday" v-model="days">Tues</label>
@@ -13,6 +15,8 @@
     </li>
     <br>
     <button @click.prevent="addUserTasks">Add Tasks</button>
+    <br>
+    <hr>
   </div>
 </template>
 
@@ -42,3 +46,12 @@
     components: {}
   }
 </script>
+<style>
+  .taskSelector {
+    list-style-type: none;
+  }
+
+  .checkbox-inline {
+    padding-left: 5px;
+  }
+</style>
