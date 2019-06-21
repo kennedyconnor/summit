@@ -94,22 +94,25 @@
       saveUserTasks() {
         let tasks = this.$store.state.pendingUserTasks
         let userId = this.$store.state.user._id
+        debugger
         for (const taskId in tasks) {
-          const instances = tasks[taskId]
-          let data = {
-            userId,
-            taskId,
-            instances
+          if (tasks[taskId][0]) {
+            const instances = tasks[taskId]
+            let data = {
+              userId,
+              taskId,
+              instances
+            }
+            data.instances = data.instances.map(d => {
+              return { day: d }
+            })
+            this.$store.dispatch('addUserTask', JSON.parse(JSON.stringify(data)))
           }
-          data.instances = data.instances.map(d => {
-            return { day: d }
-          })
-          this.$store.dispatch('addUserTask', JSON.parse(JSON.stringify(data)))
         }
         this.reset++
-        tasks = {}
         $("#taskDetails").modal("hide");
         $(".modal-backdrop").remove();
+        this.$store.commit("emptyPendingUserTasks")
       }
     },
 
