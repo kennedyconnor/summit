@@ -24,7 +24,7 @@ export default new Vuex.Store({
     goals: [],
     userTasks: [],
     pendingUserTasks: {},  //or emit an event- child calling parent
-    tags: ["Health", "Organization", "Hygiene", "Finances"] //may move the tags in store.state into data if it is only referenced by the tasks component
+    tags: ["Health", "Organization", "Hygiene", "Finances"], //may move the tags in store.state into data if it is only referenced by the tasks component
   },
   mutations: {
     setUser(state, user) {
@@ -114,7 +114,7 @@ export default new Vuex.Store({
       try {
 
         let res = await api.get('/usertasks/users/' + userId)
-       // console.log("Get user tasks by user: ", res.data)
+        // console.log("Get user tasks by user: ", res.data)
         commit('setUserTasks', res.data)
       } catch (error) { console.error(error) }
     },

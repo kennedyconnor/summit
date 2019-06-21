@@ -9,6 +9,7 @@
 <script>
   import UserInfo from "@/components/UserInfo.vue"
   import TaskCalendar from "@/components/TaskCalendar.vue"
+
   export default {
     name: "",
     props: [],
@@ -19,7 +20,7 @@
     methods: {},
     components: {
       UserInfo,
-      TaskCalendar
+      TaskCalendar,
     }
   }
 </script>
