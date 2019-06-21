@@ -1,11 +1,12 @@
 <template>
 
   <div class="col-1.5">
-
     <h3>{{day}}</h3>
+    <!-- <li v-for="task in dayTasks">{{task.taskId.title}} -- {{task.taskId.points}}
+        Completed: {{task.instances.filter(x => x.day == day)[0].completed }} -->
+    <!-- this won't work if you have multiple instance of a task on the same day -->
     <div v-for="task in dayTasks">
-
-      <label class="checkbox"><input type="checkbox" @change="toggleTaskStatus(task)">{{task.taskId.title}} --
+      <label class="checkbox"><input type="checkbox">{{task.taskId.title}} --
         {{task.taskId.points}}
         Completed: {{task.instances.filter(x => x.day == day)[0].completed }}
       </label>
