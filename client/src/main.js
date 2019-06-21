@@ -17,8 +17,18 @@ class AuthService {
 
 async function appStart() {
   let _authService = new AuthService
-  let user = await _authService.Authenticate()
-  store.commit('setUser', user)
+  try {
+    let user = await _authService.Authenticate()
+    store.commit('setUser', user)
+    if (router.currentRoute.name == 'login') {
+      router.push({ name: 'home' })
+    }
+  } catch (error) {
+    console.error(error)
+    router.push({ name: 'login' })
+
+  }
+
 
   new Vue({
     router,
@@ -30,6 +40,7 @@ async function appStart() {
   }).$mount('#app')
 
 }
+
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
 let auth = axios.create({
   baseURL: base + "auth/",
