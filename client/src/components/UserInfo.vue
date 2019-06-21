@@ -1,8 +1,8 @@
 <template>
   <div class="userInfoBox">
-    <div class="row">
+    <div class="row d-flex">
       <div class="col-2 d-flex justify-content-start">
-        <img src="../assets/logo.png" alt="">
+        <img class="img-fluid" src="../assets/logo.png" alt="">
       </div>
       <div class="col-8 d-flex align-items-center justify-content-start">
         <ul>
