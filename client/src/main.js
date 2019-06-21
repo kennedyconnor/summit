@@ -26,9 +26,7 @@ async function appStart() {
   } catch (error) {
     console.error(error)
     router.push({ name: 'login' })
-
   }
-
 
   new Vue({
     router,
