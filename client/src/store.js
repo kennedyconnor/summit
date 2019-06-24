@@ -58,10 +58,11 @@ export default new Vuex.Store({
         })
     },
     authenticate({ commit, dispatch }) {
+      // debugger
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          // debugger
+          dispatch('getUserTasksByUserId', res.data._id)
           if (router.currentRoute.name == 'login') {
             router.push({ name: 'home' })
           } //add some conditionals to prevent unwanted redirects
