@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png"> <button @click="logout">Log Out</button>
+  <div class="home parallax">
+    <div>
+      <button @click="logout">Log Out</button>
+      <img class="parallax" alt="Summit Mountain" src="../assets/mountain.png">
+    </div>
   </div>
 </template>
 
@@ -20,3 +23,13 @@
     }
   }
 </script>
+
+<style>
+  .parallax {
+    /* background-image: url("../assets/mountain.png"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-attachment: fixed;
+  }
+</style>

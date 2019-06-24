@@ -8,8 +8,7 @@
     <div v-for="task in instances">
       <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
           @click="toggleTaskStatus(task)">{{task.taskData.title}} --
-        {{task.taskData.points}}
-        Completed: {{task.completed }}
+        {{task.taskData.points}} points
       </label>
       <button class="btn btn-danger" type="button" @click="deleteUserTaskInstance(task)">Delete</button>
       <br>
@@ -62,10 +61,8 @@
       toggleTaskStatus(task) {
         task.completed = !task.completed
         let updatedUserTask = this.dayTasks.find(t => task.userTaskId == t._id)
-        debugger
         this.$store.dispatch('toggleTaskStatus', updatedUserTask)
         console.log(task)
-
       },
 
     },
