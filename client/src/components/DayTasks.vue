@@ -5,15 +5,15 @@
     <!-- <li v-for="task in dayTasks">{{task.taskId.title}} -- {{task.taskId.points}}
         Completed: {{task.instances.filter(x => x.day == day)[0].completed }} -->
     <!-- this won't work if you have multiple instance of a task on the same day -->
-    <div v-for="task in dayTasks">
-      <label class="checkbox"><input type="checkbox">{{task.taskId.title}} --
-        {{task.taskId.points}}
-        Completed: {{task.instances.filter(x => x.day == day)[0].completed }}
+    <div v-for="task in instances">
+      <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
+          @click="toggleTaskStatus(task)">{{task.taskData.title}} --
+        {{task.taskData.points}}
+        Completed: {{task.completed }}
       </label>
       <button class="btn btn-danger" type="button" @click="deleteUserTask(task)">Delete</button>
       <br>
     </div>
-
   </div>
 
 
@@ -24,16 +24,28 @@
     name: "",
     props: ["day"],
     data() {
+
       return {}
     },
     computed: {
       dayTasks() {
-        let tasks = this.$store.state.userTasks
+        let tasks = this.$store.state.userTasks || []
         // debugger
         let dayTasks = tasks.filter(task => {
           return task.instances.some(instance => this.day == instance.day)
         })
-        return dayTasks
+        return dayTasks || []
+      },
+      instances() {
+        let tasks = []
+        this.dayTasks.forEach(dt => {
+          tasks = [...tasks, ...dt.instances.map(i => {
+            i.userTaskId = dt._id
+            i.taskData = dt.taskId
+            return i;
+          })]
+        })
+        return tasks.filter(t => t.day == this.day)
       }
     },
     methods: {
@@ -42,11 +54,11 @@
       },
 
       toggleTaskStatus(task) {
-        if (task.instances.some(instance => this.day == instance.day)) {
-          task.instances.completed = !task.instances.completed
-        }
-        this.$store.dispatch('toggleTaskStatus', task)
-        console.log(task.instances.completed)
+        task.completed = !task.completed
+        let updatedUserTask = this.dayTasks.find(t => task.userTaskId == t._id)
+        debugger
+        this.$store.dispatch('toggleTaskStatus', updatedUserTask)
+        console.log(task)
 
       },
 
@@ -68,3 +80,9 @@
     // }
   }
 </script>
+
+<style>
+  .strikethrough {
+    text-decoration: line-through;
+  }
+</style>

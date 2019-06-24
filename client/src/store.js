@@ -136,7 +136,7 @@ export default new Vuex.Store({
       try {
         let res = await api.put('/usertasks/' + task._id)
         debugger
-        commit('setUserTasks', res.data)
+        this.dispatch('getUserTasksByUserId', task.userId._id)
         console.log("store.js, toggleTaskStatus, returning: ", res.data)
       } catch (error) { console.error(error) }
     }
