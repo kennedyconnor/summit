@@ -41,6 +41,10 @@ export default new Vuex.Store({
     },
     setPendingUserTask(state, pendingTask) {
       Vue.set(state.pendingUserTasks, pendingTask.id, pendingTask.days)
+    },
+    emptyPendingUserTasks(state) {
+      // debugger
+      state.pendingUserTasks = {}
     }
   },
 
@@ -125,8 +129,16 @@ export default new Vuex.Store({
         let res = await api.delete('/usertasks/' + userTaskId)
         console.log(res)
 
-      } catch (error) { console.error(error)  }
+      } catch (error) { console.error(error) }
+    },
 
+    async toggleTaskStatus({ commit, dispatch }, task) {
+      try {
+        let res = await api.put('/usertasks/' + task._id)
+        debugger
+        commit('setUserTasks', res.data)
+        console.log("store.js, toggleTaskStatus, returning: ", res.data)
+      } catch (error) { console.error(error) }
     }
 
     //#endregion

@@ -31,15 +31,19 @@
           userId: this.$store.state.user._id,
           taskId: this.taskData._id,
           instances: []
-        }
+        },
+        // notAReset: true
       }
     },
     watch: {
       days: function (newDays, old) {
+        if (this.days == 'stop') { return }
         this.$store.dispatch('newUserTask', { id: this.taskData._id, days: newDays })
       },
       reset: function () {
-        this.days = []
+        if (this.days[0]) { this.days = 'stop' }
+
+        // this.$store.commit("emptyPendingUserTasks")
       }
     },
 
