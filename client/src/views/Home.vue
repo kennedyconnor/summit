@@ -6,14 +6,24 @@
         <div class="card" style="width: 18rem;">
           <div class="card-header">{{ day }}
           </div>
+          <!-- <label class="checkbox" v-bind:class="{isChecked:task.completed}">
+            <input type="checkbox" v-model="task.completed" v-for="task in instances"
+              @click="toggleTaskStatus(task)">{{task.taskData.title}} --
+            {{task.taskData.points}} points</li>
+          </label> -->
           <ul class="list-group list-group-flush" v-for="task in instances">
-            <li class="list-group-item">{{task.taskData.title}} --
-              {{task.taskData.points}} points</li>
+            <label class="checkbox-inline"><input type="checkbox" v-model="task.completed"
+                @click="toggleTaskStatus(task)">{{task.taskData.title}} --
+              {{task.taskData.points}} points</li></label>
           </ul>
         </div>
       </div>
     </div>
   </div>
+  <!-- <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
+      @click="toggleTaskStatus(task)">{{task.taskData.title}} --
+    {{task.taskData.points}} points
+  </label> -->
 </template>
 
 <script>
@@ -59,6 +69,9 @@
       logout() {
         this.$store.dispatch('logout')
       }
+    },
+    mounted() {
+      this.$store.dispatch('getUserTasksByUserId', this.$store.state.user._id)
     }
   }
 </script>
