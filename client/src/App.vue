@@ -14,7 +14,7 @@
             <router-link to="/task-manager">Task Manager<br></router-link>
             <router-link to="/profile">My Profile<br></router-link>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="logout">Log Out</a>
+            <a class="dropdown-item" @click="logout">Log Out</a>
           </div>
         </div>
       </div>
