@@ -1,7 +1,7 @@
 <template>
   <div class="home parallax">
     <div class="row">
-      <!-- <img class="parallax" alt="Summit Mountain" src="../assets/mountain.png"> -->
+      <img class="parallax" alt="Summit Mountain" src="../assets/mountain2.png">
       <div class="col d-flex justify-content-end">
         <div class="card" style="width: 18rem;">
           <div class="card-header">{{ day }}
@@ -70,5 +70,6 @@
     background-repeat: no-repeat;
     height: 100vh;
     background-attachment: fixed;
+    position: absolute;
   }
 </style>
