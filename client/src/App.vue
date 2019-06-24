@@ -1,14 +1,37 @@
 <template>
   <div class="container-fluid" id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/task-manager">Task Manager</router-link> |
-      <router-link to="/profile">My Profile</router-link>
+    <div class="row">
+      <div class="col d-flex justify-content-end">
+        <div class="btn-group">
+          <button type="button" class="btn btn-info"><i class="fas fa-bars fa-1x"></i></button>
+          <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <router-link to="/">Home<br></router-link>
+            <router-link to="/login">Login<br></router-link>
+            <router-link to="/task-manager">Task Manager<br></router-link>
+            <router-link to="/profile">My Profile<br></router-link>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" @click="logout">Log Out</a>
+          </div>
+        </div>
+      </div>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+  export default {
+    methods: {
+      logout() {
+        this.$store.dispatch('logout')
+      }
+    }
+  }
+</script>
 
 <style>
   #app {

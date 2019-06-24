@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png"> <button @click="logout">Log Out</button>
+    <img alt="Vue logo" src="../assets/logo.png">
+    <!-- Drop Down Button -->
+
+
   </div>
 </template>
 

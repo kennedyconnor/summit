@@ -65,9 +65,7 @@
         debugger
         this.$store.dispatch('toggleTaskStatus', updatedUserTask)
         console.log(task)
-
       },
-
     },
     components: {}
     //when the checkbox is selected, flip completed bool from false to true
