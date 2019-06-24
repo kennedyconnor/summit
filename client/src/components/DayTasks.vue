@@ -10,7 +10,7 @@
         {{task.taskId.points}}
         Completed: {{task.instances.filter(x => x.day == day)[0].completed }}
       </label>
-      <button class="btn btn-danger" type="button" @click="deleteUserTask(task)">Delete</button>
+      <button class="btn btn-danger" type="button" @click="deleteUserTaskInstance(task)">Delete</button>
       <br>
     </div>
 
@@ -37,8 +37,14 @@
       }
     },
     methods: {
-      deleteUserTask(task) {
-        this.$store.dispatch("deleteUserTask", task)
+      deleteUserTaskInstance(userTask) {
+
+        let editedTask = {
+          id: userTask._id,
+          userId: userTask.userId._id,
+          instances: userTask.instances.filter(day => day.day !== this.day)
+        }
+        this.$store.dispatch("editUserTaskById", editedTask)
       },
 
       toggleTaskStatus(task) {

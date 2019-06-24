@@ -52,7 +52,7 @@ export default class UserTaskController {
 
   async editUserTask(req, res, next) {
     try {
-      let goal = await _repo.findOneAndUpdate(req.params.id, req.body, { new: true })
+      let goal = await _repo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       return res.send(goal)
     } catch (error) { next(error) }
   }
