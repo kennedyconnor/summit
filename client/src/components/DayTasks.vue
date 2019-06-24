@@ -38,13 +38,13 @@
     },
     methods: {
       deleteUserTaskInstance(userTask) {
-
         let editedTask = {
           id: userTask._id,
           userId: userTask.userId._id,
           instances: userTask.instances.filter(day => day.day !== this.day)
         }
-        this.$store.dispatch("editUserTaskById", editedTask)
+        if (editedTask.instances[0]) { this.$store.dispatch("editUserTaskById", editedTask) }
+        else { this.$store.dispatch("deleteUserTask", userTask) }
       },
 
       toggleTaskStatus(task) {

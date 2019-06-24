@@ -94,7 +94,6 @@
       saveUserTasks() {
         let tasks = this.$store.state.pendingUserTasks
         let userId = this.$store.state.user._id
-        debugger
         for (const taskId in tasks) {
           if (tasks[taskId][0]) {
             const instances = tasks[taskId]
