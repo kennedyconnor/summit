@@ -10,7 +10,7 @@
         {{task.taskId.points}}
         Completed: {{task.instances.filter(x => x.day == day)[0].completed }}
       </label>
-      <button class="btn btn-danger" type="button" @click="deleteUserTask(task._id)">Delete</button>
+      <button class="btn btn-danger" type="button" @click="deleteUserTask(task)">Delete</button>
       <br>
     </div>
 
@@ -37,8 +37,8 @@
       }
     },
     methods: {
-      deleteUserTask(id) {
-        this.$store.dispatch("deleteUserTask", id)
+      deleteUserTask(task) {
+        this.$store.dispatch("deleteUserTask", task)
       },
 
       toggleTaskStatus(task) {

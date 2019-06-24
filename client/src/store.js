@@ -123,11 +123,11 @@ export default new Vuex.Store({
       } catch (error) { console.error(error) }
     },
 
-    async deleteUserTask({ dispatch, commit }, userTaskId) {
+    async deleteUserTask({ dispatch, commit }, task) {
       try {
-
-        let res = await api.delete('/usertasks/' + userTaskId)
+        let res = await api.delete('/usertasks/' + task._id)
         console.log(res)
+        this.dispatch('getUserTasksByUserId', task.userId._id)
 
       } catch (error) { console.error(error) }
     },
