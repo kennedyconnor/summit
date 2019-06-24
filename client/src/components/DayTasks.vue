@@ -7,7 +7,7 @@
     <!-- this won't work if you have multiple instance of a task on the same day -->
     <div v-for="task in instances">
       <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
-          @click="toggleTaskStatus(task)">{{task.taskData.title}} --
+          @click="toggleTaskStatus(task, $event)">{{task.taskData.title}} --
         {{task.taskData.points}}
         Completed: {{task.completed }}
       </label>
@@ -50,24 +50,23 @@
     },
     methods: {
       deleteUserTaskInstance(userTask) {
+        let arrayInstances = this.dayTasks.filter(dt => dt._id == userTask.userTaskId)[0].instances
         let editedTask = {
-          id: userTask._id,
-          userId: userTask.userId._id,
-          instances: userTask.instances.filter(day => day.day !== this.day)
+          id: userTask.userTaskId,
+          userId: this.$store.state.user._id,
+          instances: arrayInstances.filter(day => day.day !== this.day)
+          // instances: userTask.instances.filter(day => day.day !== this.day)
         }
         if (editedTask.instances[0]) { this.$store.dispatch("editUserTaskById", editedTask) }
-        else { this.$store.dispatch("deleteUserTask", userTask) }
+        else { this.$store.dispatch("deleteUserTask", editedTask) }
       },
 
-      toggleTaskStatus(task) {
+      toggleTaskStatus(task, event) {
         task.completed = !task.completed
         let updatedUserTask = this.dayTasks.find(t => task.userTaskId == t._id)
-        debugger
+
         this.$store.dispatch('toggleTaskStatus', updatedUserTask)
-        console.log(task)
-
-      },
-
+      }
     },
     components: {}
     //when the checkbox is selected, flip completed bool from false to true

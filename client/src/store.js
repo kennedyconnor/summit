@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
+import UserTaskService from '../../server/services/UserTaskService';
 
 Vue.use(Vuex)
 
@@ -91,6 +92,21 @@ export default new Vuex.Store({
         console.log('got User by email:', res.data)
       } catch (error) { console.error(error) }
     },
+
+    async editUser({ commit, dispatch }, payload) {
+      try {
+        let res = await auth.put(payload._id, payload)
+        console.log('User has actually been edited successfully:', res.data)
+        commit('setUser', res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
+
+
+
+
     //#endregion
 
 
@@ -120,7 +136,23 @@ export default new Vuex.Store({
         let res = await api.get('/usertasks/users/' + userId)
         // console.log("Get user tasks by user: ", res.data)
         commit('setUserTasks', res.data)
+        this.dispatch("calculateUserPoints")
       } catch (error) { console.error(error) }
+    },
+
+    async calculateUserPoints({ commit, dispatch }) {
+      try {
+        let pointSum = 0
+        this.state.userTasks.forEach(ut => {
+          let count = 0
+          ut.instances.forEach(instance => { if (instance.completed) { count++ } })
+          pointSum += count * ut.taskId.points
+        })
+        this.state.user.points = pointSum
+        this.dispatch('editUser', this.state.user)
+      } catch (error) {
+        console.error(error)
+      }
     },
 
     async editUserTaskById({ commit, dispatch }, task) {
@@ -133,10 +165,9 @@ export default new Vuex.Store({
 
     async deleteUserTask({ dispatch, commit }, task) {
       try {
-        debugger
-        let res = await api.delete('/usertasks/' + task._id)
+        let res = await api.delete('/usertasks/' + task.id)
         console.log(res.data)
-        this.dispatch('getUserTasksByUserId', task.userId._id)
+        this.dispatch('getUserTasksByUserId', task.userId)
 
       } catch (error) { console.error(error) }
     },
@@ -144,7 +175,6 @@ export default new Vuex.Store({
     async toggleTaskStatus({ commit, dispatch }, task) {
       try {
         let res = await api.put('/usertasks/' + task._id, task)
-        debugger
         this.dispatch('getUserTasksByUserId', task.userId._id)
         console.log("store.js, toggleTaskStatus, returning: ", res.data)
       } catch (error) { console.error(error) }

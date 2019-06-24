@@ -7,6 +7,8 @@
       <router-link to="/profile">My Profile</router-link>
     </div>
     <router-view />
+
+
   </div>
 </template>
 
