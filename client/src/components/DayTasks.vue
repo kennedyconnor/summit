@@ -6,7 +6,7 @@
         Completed: {{task.instances.filter(x => x.day == day)[0].completed }} -->
     <!-- this won't work if you have multiple instance of a task on the same day -->
     <div v-for="task in instances">
-      <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
+      <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
           @click="toggleTaskStatus(task)">{{task.taskData.title}} --
         {{task.taskData.points}}
         Completed: {{task.completed }}
@@ -88,7 +88,8 @@
 </script>
 
 <style>
-  .strikethrough {
+  .isChecked {
     text-decoration: line-through;
+    color: goldenrod;
   }
 </style>
