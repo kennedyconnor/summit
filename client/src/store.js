@@ -119,6 +119,16 @@ export default new Vuex.Store({
       } catch (error) { console.error(error) }
     },
 
+    async deleteUserTask({ dispatch, commit }, userTaskId) {
+      try {
+
+        let res = await api.delete('/usertasks/' + userTaskId)
+        console.log(res)
+
+      } catch (error) { console.error(error)  }
+
+    }
+
     //#endregion
   }
 
