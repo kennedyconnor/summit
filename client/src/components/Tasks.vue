@@ -3,21 +3,21 @@
     <div class="col-sm-12">
       <div class="dropdown">
         <button class="btn btn-success" data-toggle="modal" data-target="#taskDetails">Select
-          Tasks</button>
+          Task</button>
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Tags
+          Select Goal
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" v-for="tag in tags" @click="filter = tag">{{tag}}</a>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12">
-          <ul>
-            <li v-for="task in tasksByTag">
-              {{task.title}} - {{task.description}} {{task.points}} points
-            </li>
+        <div class="col-sm-6" v-for="task in tasksByTag">
+          <!-- <ul>
+            <li > -->
+          {{task.title}} - {{task.description}} {{task.points}} points
+          <!-- </li> -->
           </ul>
         </div>
       </div>
