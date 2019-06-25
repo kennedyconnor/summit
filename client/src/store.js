@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
-import UserTaskService from '../../server/services/UserTaskService';
 
 Vue.use(Vuex)
 
@@ -97,7 +96,6 @@ export default new Vuex.Store({
     async editUser({ commit, dispatch }, payload) {
       try {
         let res = await auth.put(payload._id, payload)
-        console.log('User has actually been edited successfully:', res.data)
         commit('setUser', res.data)
       } catch (error) {
         console.error(error)
@@ -133,11 +131,18 @@ export default new Vuex.Store({
 
     async getUserTasksByUserId({ commit, dispatch }, userId) {
       try {
-
         let res = await api.get('/usertasks/users/' + userId)
         // console.log("Get user tasks by user: ", res.data)
         commit('setUserTasks', res.data)
-        this.dispatch("calculateUserPoints")
+      } catch (error) { console.error(error) }
+    },
+
+    async getUserTasksAndUpdatePoints({ commit, dispatch }, userId) {
+      try {
+        let res = await api.get('/usertasks/users/' + userId)
+        // console.log("Get user tasks by user: ", res.data)
+        commit('setUserTasks', res.data)
+        this.dispatch('calculateUserPoints')
       } catch (error) { console.error(error) }
     },
 
@@ -176,8 +181,7 @@ export default new Vuex.Store({
     async toggleTaskStatus({ commit, dispatch }, task) {
       try {
         let res = await api.put('/usertasks/' + task._id, task)
-        this.dispatch('getUserTasksByUserId', task.userId._id)
-        console.log("store.js, toggleTaskStatus, returning: ", res.data)
+        this.dispatch('getUserTasksAndUpdatePoints', task.userId._id)
       } catch (error) { console.error(error) }
     }
 

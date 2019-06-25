@@ -36,7 +36,7 @@ export default class UserTaskController {
 
   async getUserTaskByUserId(req, res, next) {
     try {
-      let data = await _repo.find({ userId: req.params.id })
+      let data = await _repo.find({ userId: req.params.id, accounted: false })
         .populate('userId')
         .populate('taskId')
       return res.send(data)
