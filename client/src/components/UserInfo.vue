@@ -1,7 +1,7 @@
 <template>
   <div class="userInfoBox">
     <div class="row d-flex bg-secondary" style="height: 35vh">
-      <div class="col-7  d-flex align-items-center justify-content-center" style="height:100%">
+      <div class="col-sm-7 d-flex align-items-center justify-content-center" style="height:100%">
         <img class="img-fluid" src="../assets/harvey.png" alt="" style="height: 90%">
         <div class="card">
           <div class="card-body">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4 d-flex align-items-center justify-content-center">
+      <div class="col-sm-4 d-flex align-items-center justify-content-center">
         <div class="card" style="width: 12rem; height: 90%">
           <div class="card-body">
             <h6 class="card-title"><b>Tags</b>

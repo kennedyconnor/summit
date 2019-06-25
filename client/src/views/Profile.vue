@@ -1,5 +1,5 @@
 <template>
-  <div class=" ">
+  <div class="profile">
     <h1>My Profile</h1>
     <UserInfo />
     <TaskCalendar />
@@ -11,7 +11,7 @@
   import TaskCalendar from "@/components/TaskCalendar.vue"
 
   export default {
-    name: "",
+    name: "Profile",
     props: [],
     data() {
       return {}

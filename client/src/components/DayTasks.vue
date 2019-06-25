@@ -1,18 +1,16 @@
 <template>
-
-  <div class="col-1.5">
+  <div class="col-sm">
     <h3>{{day}}</h3>
-    <div v-for="task in instances">
+    <div v-for="task in instances" :class="task.taskData.tags[0]">
       <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
-          @click="toggleTaskStatus(task, $event)">{{task.taskData.title}} --
+          @click="toggleTaskStatus(task, $event)">{{task.taskData.title}} -
         {{task.taskData.points}}
-        Completed: {{task.completed }}
+        <!-- Completed: {{task.completed }} -->
       </label>
-      <button class="btn btn-danger" type="button" @click="deleteUserTaskInstance(task)">Delete</button>
+      <button class="btn fas fa-trash-alt fa-sm" @click="deleteUserTaskInstance(task)"></button>
       <br>
     </div>
   </div>
-
 
 </template>
 
@@ -43,7 +41,10 @@
           })]
         })
         return tasks.filter(t => t.day == this.day)
-      }
+      },
+      tags() {
+        return this.$store.state.tags
+      },
     },
     methods: {
       deleteUserTaskInstance(userTask) {
@@ -87,5 +88,21 @@
   .isChecked {
     text-decoration: line-through;
     color: goldenrod;
+  }
+
+  .Health {
+    color: red;
+  }
+
+  .Organization {
+    color: darkblue;
+  }
+
+  .Hygiene {
+    color: purple;
+  }
+
+  .Finances {
+    color: darkgreen;
   }
 </style>
