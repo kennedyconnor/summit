@@ -1,29 +1,27 @@
 <template>
-  <div class="home parallax">
+  <div class="row home">
+    <img class="parallax" alt="Summit Mountain" src="../assets/mountain2.png">
+    <div class="col d-flex justify-content-end">
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">{{ day }}
+        </div>
+        <ul class="list-group list-group-flush" v-for="task in instances" v-if="task.completed == false">
+          <label class="checkbox-inline" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
+              v-model="task.completed" @click="toggleTaskStatus(task, event)">{{task.taskData.title}} --
+            {{task.taskData.points}} points</li></label>
+        </ul>
+      </div>
+    </div>
     <div class="row">
-      <img class="parallax" alt="Summit Mountain" src="../assets/mountain2.png">
-      <div class="col d-flex justify-content-end">
-        <div class="card" style="width: 18rem;">
-          <div class="card-header">{{ day }}
-          </div>
-          <!-- <label class="checkbox" v-bind:class="{isChecked:task.completed}">
-            <input type="checkbox" v-model="task.completed" v-for="task in instances"
-              @click="toggleTaskStatus(task)">{{task.taskData.title}} --
-            {{task.taskData.points}} points</li>
-          </label> -->
-          <ul class="list-group list-group-flush" v-for="task in instances">
-            <label class="checkbox-inline"><input type="checkbox" v-model="task.completed"
-                @click="toggleTaskStatus(task)">{{task.taskData.title}} --
-              {{task.taskData.points}} points</li></label>
-          </ul>
+      <!-- vertical progress bar -->
+      <div class="col d-flex justify-content-start">
+        <div class="progress" style="height: 20px;">
+          <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%;" aria-valuenow="50"
+            aria-valuemin="0" aria-valuemax="2000"></div>
         </div>
       </div>
     </div>
   </div>
-  <!-- <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
-      @click="toggleTaskStatus(task)">{{task.taskData.title}} --
-    {{task.taskData.points}} points
-  </label> -->
 </template>
 
 <script>
@@ -68,6 +66,13 @@
     methods: {
       logout() {
         this.$store.dispatch('logout')
+      },
+
+      toggleTaskStatus(task, event) {
+        task.completed = !task.completed
+        let updatedUserTask = this.dayTasks.find(t => task.userTaskId == t._id)
+
+        this.$store.dispatch('toggleTaskStatus', updatedUserTask)
       }
     },
     mounted() {
@@ -84,5 +89,21 @@
     height: 100vh;
     background-attachment: fixed;
     position: absolute;
+  }
+
+  .isChecked {
+    text-decoration: line-through;
+    color: goldenrod;
+  }
+
+  .vertical {
+    display: inline-block;
+    width: 20%;
+    height: 80vh;
+  }
+
+  .progress-bar {
+    box-shadow: inset 0px 4px 6px rgba(100, 100, 100, 0.6);
+    transform: rotate(-90deg);
   }
 </style>

@@ -24,7 +24,7 @@ async function appStart() {
       router.push({ name: 'home' })
     }
   } catch (error) {
-    console.error(error)
+    console.error("error on main.js")
     router.push({ name: 'login' })
   }
 
