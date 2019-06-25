@@ -1,14 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-6">
-      <ul>
-        <li v-for="task in tasksByTag">
-          {{task.title}} -- {{task.description}} -- {{task.points}}
-        </li>
-      </ul>
-    </div>
-    <div class="col-6">
+    <div class="col-sm-12">
       <div class="dropdown">
+        <button class="btn btn-success" data-toggle="modal" data-target="#taskDetails">Select
+          Tasks</button>
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Tags
@@ -17,7 +12,15 @@
           <a class="dropdown-item" v-for="tag in tags" @click="filter = tag">{{tag}}</a>
         </div>
       </div>
-      <button class="btn btn-success" data-toggle="modal" data-target="#taskDetails" type="submit">Edit Tasks</button>
+      <div class="row">
+        <div class="col-sm-12">
+          <ul>
+            <li v-for="task in tasksByTag">
+              {{task.title}} - {{task.description}} {{task.points}} points
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- modal -->
@@ -120,3 +123,9 @@
     }
   }
 </script>
+
+<style>
+  ul {
+    list-style-type: none;
+  }
+</style>
