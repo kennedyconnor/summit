@@ -20,7 +20,7 @@ async function appStart() {
   try {
     let user = await _authService.Authenticate()
     store.commit('setUser', user)
-    store.dispatch('getUserTasksByUserId', user._id)
+
     store.dispatch('mostRecentSunday') //calculate most recent sunday
     if (router.currentRoute.name == 'login') {
       router.push({ name: 'home' })

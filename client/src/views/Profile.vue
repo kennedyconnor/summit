@@ -17,6 +17,9 @@
       return {}
 
     },
+    mounted() {
+      this.$store.dispatch('getUserTasksByUserId', this.$store.state.user._id)
+    },
     methods: {},
     components: {
       UserInfo,

@@ -109,15 +109,20 @@ export default new Vuex.Store({
       }
     },
 
-    summitCheck() {
-      this.dispatch("clearUser")
-      let userTasks = this.state.userTasks
-      // debugger
-      userTasks.forEach(ut => {
-        ut.accounted = true
-        this.dispatch("clearUserTask", ut)
-      })
-      this.dispatch('getUserTasksByUserId', this.state.user._id)
+    async summitCheck() {
+      try {
+        let res = await api.get('/usertasks/users/' + this.state.user._id)
+        let lastTask = false
+        this.commit('setUserTasks', res.data)
+        this.dispatch("clearUser")
+        let userTasks = this.state.userTasks
+        userTasks.forEach(ut => {
+          ut.accounted = true
+          this.dispatch("clearUserTask", ut) //SENDING GET EVERY CHANGE,  CAN FIX???
+        })
+      } catch (error) {
+
+      }
     },
 
     clearUser({ commit, dispatch }) {
@@ -129,7 +134,8 @@ export default new Vuex.Store({
         alert("Keep at it slugger. Tomorrow is a new day!")
       }
       this.state.user.summits[1]++
-      //this.state.user.points = 0
+      this.state.user.points = 0
+      this.state.user.mostRecentSunday = this.state.mostRecentSunday
       this.dispatch('editUser', this.state.user)
     },
 
@@ -200,6 +206,7 @@ export default new Vuex.Store({
 
     async editUserTaskById({ commit, dispatch }, task) {
       try {
+        debugger
         let res = await api.put('/usertasks/' + task.id, task)
         console.log('edited Usertask', res.data)
         this.dispatch('getUserTasksByUserId', task.userId)
@@ -222,10 +229,10 @@ export default new Vuex.Store({
       } catch (error) { console.error(error) }
     },
 
-    async clearUserTasks({ commit, dispatch }, usertask) {
+    async clearUserTask({ commit, dispatch }, usertask) {
       try {
-        debugger
         await api.put('/usertasks/' + usertask._id, usertask)
+        dispatch('getUserTasksByUserId', usertask.userId._id)
       } catch (error) { console.error(error) }
     }
 
