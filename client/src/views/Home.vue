@@ -76,9 +76,14 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getUserTasksByUserId', this.$store.state.user._id)
+      console.log("Home has been Mounted!")
+      // this.$store.dispatch('getUserTasksByUserId', this.$store.state.user._id)
+    },
+    created() {
+      console.log("Home has been Created!")
     }
   }
+
 </script>
 
 <style>

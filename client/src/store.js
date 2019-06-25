@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
+import { nextTick } from 'q';
 
 Vue.use(Vuex)
 
@@ -20,6 +21,8 @@ let api = axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
+    mostRecentSunday: 0,
+    summitThreshold: 2500,
     tasks: [],
     goals: [],
     userTasks: [],
@@ -29,6 +32,9 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user
+    },
+    setMostRecentSunday(state, num) {
+      state.mostRecentSunday = num
     },
     setTasks(state, tasks) {
       state.tasks = tasks
@@ -51,6 +57,7 @@ export default new Vuex.Store({
   actions: {
     //#region -- AUTH STUFF --
     register({ commit, dispatch }, newUser) {
+      debugger
       auth.post('register', newUser)
         .then(res => {
           commit('setUser', res.data)
@@ -102,10 +109,40 @@ export default new Vuex.Store({
       }
     },
 
+    summitCheck() {
+      this.dispatch("clearUser")
+      let userTasks = this.state.userTasks
+      // debugger
+      userTasks.forEach(ut => {
+        ut.accounted = true
+        this.dispatch("clearUserTask", ut)
+      })
+      this.dispatch('getUserTasksByUserId', this.state.user._id)
+    },
 
+    clearUser({ commit, dispatch }) {
+      if (this.state.user.points >= this.state.summitThreshold) {
+        alert("Weekly Summit Achieved!")
+        this.state.user.summits[0]++
+      }
+      else {
+        alert("Keep at it slugger. Tomorrow is a new day!")
+      }
+      this.state.user.summits[1]++
+      //this.state.user.points = 0
+      this.dispatch('editUser', this.state.user)
+    },
 
-
-
+    mostRecentSunday({ commit, dispatch }) { // return the millisecond count of the most recent sunday
+      let anchorSunday = 1561269660000 //june 23 2019 12:01AM , first sunday we count from
+      let mostRecentSunday = anchorSunday
+      let currentDate = Date.now()
+      let weekMilliseconds = 604800000 // # of milliseconds in a week
+      while ((mostRecentSunday + weekMilliseconds) < currentDate) {
+        mostRecentSunday += weekMilliseconds
+      }
+      commit('setMostRecentSunday', mostRecentSunday)
+    },
     //#endregion
 
 
@@ -182,6 +219,13 @@ export default new Vuex.Store({
       try {
         let res = await api.put('/usertasks/' + task._id, task)
         this.dispatch('getUserTasksAndUpdatePoints', task.userId._id)
+      } catch (error) { console.error(error) }
+    },
+
+    async clearUserTasks({ commit, dispatch }, usertask) {
+      try {
+        debugger
+        await api.put('/usertasks/' + usertask._id, usertask)
       } catch (error) { console.error(error) }
     }
 

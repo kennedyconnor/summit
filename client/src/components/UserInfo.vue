@@ -10,7 +10,7 @@
             </h6>
             <span class="card-text"><b>Points: {{user.points}}<br></b>
             </span>
-            <span class="card-text"><b>Summits: 0 <br></b>
+            <span class="card-text"><b>Summits: {{user.summits[0]}} <br></b>
             </span>
           </div>
         </div>

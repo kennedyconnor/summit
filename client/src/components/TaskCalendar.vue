@@ -22,7 +22,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getUserTasksByUserId', this.user._id)
+      //this.$store.dispatch('getUserTasksByUserId', this.user._id)
     },
     computed: {
       user() {

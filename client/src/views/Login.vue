@@ -38,16 +38,23 @@
         newUser: {
           email: "",
           password: "",
-          name: ""
+          name: "",
+          mostRecentSunday: 0,
+          summits: [0, 0] //[ number of summits achieved, number of lifetime possible summits]
         }
       };
     },
-    computed: {},
+    computed: {
+      mostRecentSunday() {
+        return this.$store.state.mostRecentSunday
+      }
+    },
     methods: {
       loginUser() {
         this.$store.dispatch("login", this.creds);
       },
       registerUser() {
+        this.newUser.mostRecentSunday = this.mostRecentSunday
         this.$store.dispatch("register", this.newUser);
       }
     },
