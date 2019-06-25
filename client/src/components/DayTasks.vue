@@ -4,10 +4,11 @@
     <div v-for="task in instances" :class="task.taskData.tags[0]">
       <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
           @click="toggleTaskStatus(task, $event)">{{task.taskData.title}} -
-        {{task.taskData.points}}
+        {{task.taskData.points}} points <button class="btn fas fa-trash-alt fa-sm"
+          @click="deleteUserTaskInstance(task)"></button>
         <!-- Completed: {{task.completed }} -->
       </label>
-      <button class="btn fas fa-trash-alt fa-sm" @click="deleteUserTaskInstance(task)"></button>
+
       <br>
     </div>
   </div>

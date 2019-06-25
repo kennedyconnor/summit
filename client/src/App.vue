@@ -1,22 +1,26 @@
 <template>
   <div class="container-fluid" id="app">
-    <div class="row">
-      <div class="col d-flex justify-content-start">
+    <div class="row header-style">
+      <div class="col-1 d-flex justify-content-start">
         <div class="btn-group">
-          <button type="button" class="btn btn-info"><i class="fas fa-bars fa-1x"></i></button>
-          <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
+          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-bars fa-1x"></i>
           </button>
           <div class="dropdown-menu">
-            <router-link to="/login">Login<br></router-link>
-            <router-link to="/">Home<br></router-link>
-            <router-link to="/task-manager">Task Manager<br></router-link>
-            <router-link to="/profile">My Profile<br></router-link>
+            <router-link class="router-link-style" to="/login">Login<br></router-link>
+            <router-link class="router-link-style" to="/">Home<br></router-link>
+            <router-link class="router-link-style" to="/task-manager">Task Manager<br></router-link>
+            <router-link class="router-link-style" to="/profile">My Profile<br></router-link>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" @click="logout">Log Out</a>
+            <a class="dropdown-item log-out-style" style="background-color: #528A9D; color: white; margin: 0;"
+              @click="logout">Log
+              Out</a>
           </div>
         </div>
+      </div>
+      <div class="header-title col-4 d-flex align-items-center">
+        <h2>Summit</h2>
       </div>
     </div>
     <router-view />
@@ -55,5 +59,26 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  .header-title {
+    font-family: 'Rock Salt', cursive;
+    color: #346575;
+  }
+
+  .header-style {
+    padding-top: 10px;
+  }
+
+  .router-link-style {
+    color: #346575;
+  }
+
+  .router-link-style:hover {
+    color: #346575;
+  }
+
+  .log-out-style {
+    padding: -5px;
   }
 </style>

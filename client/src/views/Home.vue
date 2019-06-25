@@ -1,13 +1,15 @@
 <template>
   <div class="row home">
     <img class="parallax" alt="Summit Mountain" src="../assets/mountain2.png">
+
     <div class="col d-flex justify-content-end">
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">{{ day }}
+      <div class="card" style="width: auto">
+        <div class="card-header" style="background-color: #528a9d">{{ day }}
         </div>
         <ul class="list-group list-group-flush" v-for="task in instances" v-if="task.completed == false">
-          <label class="checkbox-inline" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
-              v-model="task.completed" @click="toggleTaskStatus(task, event)">{{task.taskData.title}} --
+          <label class="checkbox-inline task-font" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
+              v-model="task.completed" @click="toggleTaskStatus(task, event)" class="task-font">{{task.taskData.title}}
+            --
             {{task.taskData.points}} points</li></label>
         </ul>
       </div>
@@ -105,5 +107,20 @@
   .progress-bar {
     box-shadow: inset 0px 4px 6px rgba(100, 100, 100, 0.6);
     transform: rotate(-90deg);
+  }
+
+  .card-header {
+    color: whitesmoke;
+    font-family: 'Rock Salt', serif;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .task-font {
+    font-family: 'Raleway', sans-serif;
+    text-align: start;
+    padding: 5px 5px 0px 5px;
+
+
   }
 </style>
