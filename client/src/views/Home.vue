@@ -2,8 +2,6 @@
   <div>
     <div class="row home">
       <img class="background" alt="Summit Mountain" src="../assets/mountain2.png">
-
-
       <div class="col-10 d-flex justify-content-end">
         <div class="card" style="width: auto">
           <div class="card-header" style="background-color: #346575">{{ day }}
@@ -16,13 +14,6 @@
               {{task.taskData.points}} points</li></label>
           </ul>
         </div>
-        <ul class="list-group list-group-flush" v-for="task in instances" v-if="task.completed == false">
-          <label class="checkbox-inline task-font" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
-              v-model="task.completed" @click="toggleTaskStatus(task, event)" class="task-font">
-            <b>{{task.taskData.title}}
-              --
-              {{task.taskData.points}} points</li></b></label>
-        </ul>
       </div>
     </div>
     <div class="row">
@@ -37,7 +28,7 @@
 
   import DayTasks from '@/components/DayTasks.vue';
   import TaskCalendar from '@/components/TaskCalendar.vue';
-  import ProgressBar from '@/components/ProgressBar.vue';
+  import ProgressBar from '@/components/ProgBar.vue';
 
   export default {
     name: 'home',
@@ -97,13 +88,21 @@
 </script>
 
 <style>
-  .background {
+  img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-attachment: fixed;
+    position: absolute;
+  }
+
+  /* .background {
     background-size: cover;
     background-repeat: no-repeat;
     height: 92vh;
     background-attachment: fixed;
     position: absolute;
-  }
+  } */
 
   .isChecked {
     text-decoration: line-through;
