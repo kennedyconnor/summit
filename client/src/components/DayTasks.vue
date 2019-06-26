@@ -50,8 +50,8 @@
       deleteUserTaskInstance(userTask) {
         let arrayInstances = this.dayTasks.filter(dt => dt._id == userTask.userTaskId)[0].instances
         let editedTask = {
-          id: userTask.userTaskId,
-          userId: this.$store.state.user._id,
+          _id: userTask.userTaskId,
+          userId: { _id: this.$store.state.user._id },
           instances: arrayInstances.filter(day => day.day !== this.day)
           // instances: userTask.instances.filter(day => day.day !== this.day)
         }

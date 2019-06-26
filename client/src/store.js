@@ -111,17 +111,28 @@ export default new Vuex.Store({
 
     async summitCheck() {
       try {
+
         let res = await api.get('/usertasks/users/' + this.state.user._id)
-        let lastTask = false
         this.commit('setUserTasks', res.data)
         this.dispatch("clearUser")
+        debugger
         let userTasks = this.state.userTasks
-        userTasks.forEach(ut => {
+        for (let i = 0; i < userTasks.length; i++) {
+          let ut = userTasks[i]
           ut.accounted = true
-          this.dispatch("clearUserTask", ut) //SENDING GET EVERY CHANGE,  CAN FIX???
-        })
+          if (i < userTasks.length - 1) {
+            this.dispatch("clearUserTask", ut)
+          }
+          else {
+            this.dispatch("editUserTaskById", ut)
+          }
+        }
+        // userTasks.forEach(ut => {
+        //   ut.accounted = true
+        //   this.dispatch("clearUserTask", ut) //SENDING GET EVERY CHANGE,  CAN FIX???
+        // })
       } catch (error) {
-
+        console.error(error)
       }
     },
 
@@ -207,17 +218,18 @@ export default new Vuex.Store({
     async editUserTaskById({ commit, dispatch }, task) {
       try {
         debugger
-        let res = await api.put('/usertasks/' + task.id, task)
+        let res = await api.put('/usertasks/' + task._id, task)
         console.log('edited Usertask', res.data)
-        this.dispatch('getUserTasksByUserId', task.userId)
+        this.dispatch('getUserTasksByUserId', task.userId._id)
       } catch (error) { console.error(error) }
     },
 
     async deleteUserTask({ dispatch, commit }, task) {
       try {
-        let res = await api.delete('/usertasks/' + task.id)
+        debugger
+        let res = await api.delete('/usertasks/' + task._id)
         console.log(res.data)
-        this.dispatch('getUserTasksByUserId', task.userId)
+        this.dispatch('getUserTasksByUserId', task.userId._id)
 
       } catch (error) { console.error(error) }
     },
@@ -232,7 +244,7 @@ export default new Vuex.Store({
     async clearUserTask({ commit, dispatch }, usertask) {
       try {
         await api.put('/usertasks/' + usertask._id, usertask)
-        dispatch('getUserTasksByUserId', usertask.userId._id)
+        //dispatch('getUserTasksByUserId', usertask.userId._id)
       } catch (error) { console.error(error) }
     }
 
