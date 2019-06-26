@@ -4,7 +4,7 @@
 
     <div class="col d-flex justify-content-end">
       <div class="card" style="width: auto">
-        <div class="card-header" style="background-color: #528a9d">{{ day }}
+        <div class="card-header" style="background-color: #346575">{{ day }}
         </div>
         <ul class="list-group list-group-flush" v-for="task in instances" v-if="task.completed == false">
           <label class="checkbox-inline task-font" v-bind:class="{isChecked: task.completed}"><input type="checkbox"

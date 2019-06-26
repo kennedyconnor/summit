@@ -1,25 +1,26 @@
 <template>
   <div class="container-fluid" id="app">
     <div class="row header-style">
-      <div class="col-1 d-flex justify-content-start">
+      <div class="col-sm-1 d-flex justify-content-start">
         <div class="btn-group">
           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fas fa-bars fa-1x"></i>
           </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" style="padding-bottom: 0">
             <router-link class="router-link-style" to="/login">Login<br></router-link>
             <router-link class="router-link-style" to="/">Home<br></router-link>
             <router-link class="router-link-style" to="/task-manager">Task Manager<br></router-link>
             <router-link class="router-link-style" to="/profile">My Profile<br></router-link>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item log-out-style" style="background-color: #528A9D; color: white; margin: 0;"
+            <div class="dropdown-divider" style="margin: 0;"></div>
+            <a class="dropdown-item log-out"
+              style="background-color: #528A9D; color: white; cursor: pointer; font-family: 'Rock Salt', cursive;"
               @click="logout">Log
               Out</a>
           </div>
         </div>
       </div>
-      <div class="header-title col-4 d-flex align-items-center">
+      <div class="header-title col-sm-4 d-flex align-items-center">
         <h2>Summit</h2>
       </div>
     </div>
@@ -72,13 +73,21 @@
 
   .router-link-style {
     color: #346575;
+    padding-left: 5px;
   }
 
   .router-link-style:hover {
-    color: #346575;
+    color: rgb(115, 190, 219);
   }
 
-  .log-out-style {
-    padding: -5px;
+  .log-out:hover {
+    text-decoration: underline;
+    /* color: rgb(115, 190, 219); */
+  }
+
+  .btn-info {
+    background-color: #346575;
+    margin: 4px;
+    /* border-color: #346575; */
   }
 </style>

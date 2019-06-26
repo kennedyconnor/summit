@@ -2,18 +2,19 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="dropdown">
-        <button class="btn btn-success" data-toggle="modal" data-target="#taskDetails">Select
+        <button class="btn btn-info" data-toggle="modal" data-target="#taskDetails">Select
           Task</button>
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Select Goal
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" v-for="tag in tags" @click="filter = tag">{{tag}}</a>
+          <a class="dropdown-item" v-for="tag in tags" @click="filter = tag"
+            style="color: #346575; cursor: pointer"><b>{{tag}}</b></a>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-6" v-for="task in tasksByTag">
+      <div class="row border">
+        <div class="col-sm-6 border" v-for="task in tasksByTag">
           <!-- <ul>
             <li > -->
           {{task.title}} - {{task.description}} {{task.points}} points
@@ -41,8 +42,8 @@
 
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="saveUserTasks">Save to
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-info" @click="saveUserTasks">Save to
               Week</button>
           </div>
         </div>
@@ -128,4 +129,24 @@
   ul {
     list-style-type: none;
   }
+
+  .btn-info {
+    background-color: #346575;
+  }
+
+  .btn-info:hover {
+    color: rgb(115, 190, 219);
+    text-decoration: underline;
+  }
+
+
+  /* 
+  .dropdown-item {
+    color: #346575;
+  } */
+
+  /* 
+  .btn-info:hover {
+    background-color: #346575;
+  } */
 </style>
