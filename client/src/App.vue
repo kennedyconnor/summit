@@ -8,10 +8,10 @@
             <i class="fas fa-bars fa-1x"></i>
           </button>
           <div class="dropdown-menu" style="padding-bottom: 0">
-            <router-link class="router-link-style" to="/login">Login<br></router-link>
-            <router-link class="router-link-style" to="/">Home<br></router-link>
-            <router-link class="router-link-style" to="/task-manager">Task Manager<br></router-link>
-            <router-link class="router-link-style" to="/profile">My Profile<br></router-link>
+            <router-link class="router-link-style" to="/login"><b>Login</b><br></router-link>
+            <router-link class="router-link-style" to="/"><b>Home</b><br></router-link>
+            <router-link class="router-link-style" to="/task-manager"><b>Task Manager</b><br></router-link>
+            <router-link class="router-link-style" to="/profile"><b>My Profile</b><br></router-link>
             <div class="dropdown-divider" style="margin: 0;"></div>
             <a class="dropdown-item log-out"
               style="background-color: #528A9D; color: white; cursor: pointer; font-family: 'Rock Salt', cursive;"
