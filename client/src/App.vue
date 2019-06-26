@@ -69,7 +69,7 @@
 
   .header-style {
     padding-top: 10px;
-  }
+  } 
 
   .router-link-style {
     color: #346575;
