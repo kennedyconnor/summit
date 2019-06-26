@@ -15,7 +15,7 @@
       </div>
       <div class="row border">
         <div class="col-sm-6 border" v-for="task in tasksByTag">
-          {{task.title}} - {{task.description}} {{task.points}} points
+          <b>{{task.title}} - {{task.description}} {{task.points}} points</b>
         </div>
       </div>
     </div>

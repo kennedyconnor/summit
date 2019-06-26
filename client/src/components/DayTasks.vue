@@ -2,11 +2,19 @@
   <div class="col-sm border">
     <h3 style="padding-top: 10px; padding-bottom: 0px;">{{day}}</h3>
     <hr style="padding: 0px;">
+<<<<<<< HEAD
+    <div v-for="task in instances" class="text-nowrap d-flex" :class="task.taskData.tags[0]">
+      <label class="checkbox " v-bind:class="{isChecked: task.completed}"><input type="checkbox"
+          v-model="task.completed" @click="toggleTaskStatus(task, $event)"> {{task.taskData.title}}<button
+          v-if="task.taskData.completed = 'true'" class="btn fas fa-trash-alt fa-sm"
+          @click="deleteUserTaskInstance(task)"></button>
+=======
     <div v-for="task in instances" :class="task.taskData.tags[0]">
       <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
-          @click="toggleTaskStatus(task, $event)"> {{task.taskData.title}} -
-        {{task.taskData.points}} points <button v-if="task.taskData.completed = 'true'"
+          @click="toggleTaskStatus(task, $event)"> <b>{{task.taskData.title}} -
+          {{task.taskData.points}} points </b><button v-if="task.taskData.completed = 'true'"
           class="btn fas fa-trash-alt fa-sm" @click="deleteUserTaskInstance(task)"></button>
+>>>>>>> 7d943e843b18be55cbd4a2f3de1528fc9d89d9f6
       </label>
       <br>
     </div>
@@ -50,8 +58,8 @@
       deleteUserTaskInstance(userTask) {
         let arrayInstances = this.dayTasks.filter(dt => dt._id == userTask.userTaskId)[0].instances
         let editedTask = {
-          id: userTask.userTaskId,
-          userId: this.$store.state.user._id,
+          _id: userTask.userTaskId,
+          userId: { _id: this.$store.state.user._id },
           instances: arrayInstances.filter(day => day.day !== this.day)
           // instances: userTask.instances.filter(day => day.day !== this.day)
         }

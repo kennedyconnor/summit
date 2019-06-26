@@ -16,6 +16,13 @@
               {{task.taskData.points}} points</li></label>
           </ul>
         </div>
+        <ul class="list-group list-group-flush" v-for="task in instances" v-if="task.completed == false">
+          <label class="checkbox-inline task-font" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
+              v-model="task.completed" @click="toggleTaskStatus(task, event)" class="task-font">
+            <b>{{task.taskData.title}}
+              --
+              {{task.taskData.points}} points</li></b></label>
+        </ul>
       </div>
     </div>
     <div class="row">

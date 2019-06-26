@@ -13,6 +13,7 @@ export default class TaskController {
       .get('/:id', this.getTaskById)
       .get('/tags/:id', this.getTaskByTag)
       .post('', this.createTask)
+      .put('/:id', this.editTask)
       .delete('/:id', this.deleteTask)
       .use(this.defaultRoute)
   }
@@ -51,8 +52,17 @@ export default class TaskController {
 
   async deleteTask(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      await _repo.findOneAndRemove({ _id: req.params.id })
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
+  }
+
+  async editTask(req, res, next) {
+    try {
+      let data = await _repo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+      return res.send(data)
+    } catch (error) {
+      { next(error) }
+    }
   }
 }
