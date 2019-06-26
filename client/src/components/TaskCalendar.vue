@@ -1,13 +1,9 @@
 <template>
   <div class="weekDays">
     <div class="row">
-      <!-- <div class="col-sm-4"> -->
       <DayTasks v-for="day in days" :day="day" />
     </div>
   </div>
-  </div>
-  </div>
-  <!--  -->
 </template>
 
 <script>

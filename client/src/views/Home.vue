@@ -90,7 +90,6 @@
 
 <style>
   .parallax {
-    /* background-image: url("../assets/mountain.png"); */
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
