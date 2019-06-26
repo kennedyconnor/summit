@@ -2,11 +2,19 @@
   <div class="col-sm border">
     <h3 style="padding-top: 10px; padding-bottom: 0px;">{{day}}</h3>
     <hr style="padding: 0px;">
+<<<<<<< HEAD
     <div v-for="task in instances" class="text-nowrap d-flex" :class="task.taskData.tags[0]">
       <label class="checkbox " v-bind:class="{isChecked: task.completed}"><input type="checkbox"
           v-model="task.completed" @click="toggleTaskStatus(task, $event)"> {{task.taskData.title}}<button
           v-if="task.taskData.completed = 'true'" class="btn fas fa-trash-alt fa-sm"
           @click="deleteUserTaskInstance(task)"></button>
+=======
+    <div v-for="task in instances" :class="task.taskData.tags[0]">
+      <label class="checkbox" v-bind:class="{isChecked: task.completed}"><input type="checkbox" v-model="task.completed"
+          @click="toggleTaskStatus(task, $event)"> <b>{{task.taskData.title}} -
+          {{task.taskData.points}} points </b><button v-if="task.taskData.completed = 'true'"
+          class="btn fas fa-trash-alt fa-sm" @click="deleteUserTaskInstance(task)"></button>
+>>>>>>> 7d943e843b18be55cbd4a2f3de1528fc9d89d9f6
       </label>
       <br>
     </div>

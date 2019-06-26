@@ -1,9 +1,9 @@
 <template>
   <div class="userInfoBox">
-    <div class="row d-flex bg-secondary" style="height: 35vh">
-      <div class="col-sm-7 d-flex align-items-center justify-content-center" style="height:100%">
+    <div class="row d-flex bg-secondary" style="height: 35vh;">
+      <div class="col-sm-12 d-flex align-items-center" style="height:100%; justify-content: space-between">
         <img class="img-fluid" src="../assets/harvey.png" alt="" style="height: 90%">
-        <div class="card">
+        <div class="card" style="margin-right: 5px;">
           <div class="card-body">
             <h6 class="card-title"><b>{{ user.name }}</b>
               <hr>
@@ -14,9 +14,9 @@
             </span>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4 d-flex align-items-center justify-content-center">
-        <div class="card" style="width: 12rem; height: 90%">
+        <!-- </div>
+      <div class="col-sm-4 d-flex align-items-center justify-content-center"> -->
+        <div class="card" style="width: 12rem; height: 90%;;">
           <div class="card-body">
             <h6 class="card-title"><b>Tags</b>
               <hr>
