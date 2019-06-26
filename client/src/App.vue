@@ -19,9 +19,9 @@
               Out</a>
           </div>
         </div>
-      </div>
-      <div class="header-title col-sm-4 d-flex align-items-center">
-        <h2>Summit</h2>
+        <div class="header-title col-sm-4 d-flex align-items-center">
+          <h2>Summit</h2>
+        </div>
       </div>
     </div>
     <router-view />
