@@ -20,7 +20,6 @@ async function appStart() {
   try {
     let user = await _authService.Authenticate()
     store.commit('setUser', user)
-
     store.dispatch('mostRecentSunday') //calculate most recent sunday
     if (router.currentRoute.name == 'login') {
       router.push({ name: 'home' })
@@ -28,9 +27,7 @@ async function appStart() {
   } catch (error) {
     console.error("error on main.js")
     router.push({ name: 'login' })
-
   }
-
 
   new Vue({
     router,
@@ -41,16 +38,12 @@ async function appStart() {
     render: function (h) { return h(App) }
   }).$mount('#app')
 
-  console.log(store.state.mostRecentSunday)
-
   if (store.state.user.mostRecentSunday < store.state.mostRecentSunday) {
     console.log("Time to make a new week again!")
     store.dispatch('summitCheck')
   }
-
   if (store.state.user.mostRecentSunday == store.state.mostRecentSunday) {
     console.log("User up to date!")
-
   }
 }
 
