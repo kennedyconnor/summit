@@ -88,7 +88,7 @@
   img {
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    height: 95%;
     background-attachment: fixed;
     position: absolute;
   }

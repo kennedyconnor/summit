@@ -1,6 +1,6 @@
 <template>
   <div class="p-bar">
-    <h1>My Summit</h1>
+    <h1>Progress Bar</h1>
     <div class="progress vertical">
       <div class="progress-bar" role="progressbar" :style="{height: value+'%'}"></div>
       <span class="climber" data-toggle="tooltip" data-placement="left" :title='value'></span>
@@ -31,11 +31,13 @@
     transform: scaleY(-1);
     overflow: visible;
     background-color: #b2d1db85;
+    /* background-color: transparent; */
     /* bg-transparent makes bar see-through for stacking multiple users on top of each other when making teams*/
   }
 
   .progress-bar {
     background-color: #346575;
+    /* background-color: transparent; */
     /* bg-transparent makes bar see-through for stacking multiple users on top of each other when making teams*/
 
   }
