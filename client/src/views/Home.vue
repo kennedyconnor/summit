@@ -2,24 +2,21 @@
   <div>
     <div class="row home">
       <img class="background" alt="Summit Mountain" src="../assets/mountain2.png">
-      <div class="col-10 d-flex justify-content-end">
+      <div class="col-12 d-flex justify-content-between">
+        <div>
+          <ProgressBar />
+        </div>
         <div class="card" style="width: auto">
           <div class="card-header" style="background-color: #346575">{{ day }}
           </div>
           <ul class="list-group list-group-flush" v-for="task in instances" v-if="task.completed == false">
             <label class="checkbox-inline task-font" v-bind:class="{isChecked: task.completed}"><input type="checkbox"
                 v-model="task.completed" @click="toggleTaskStatus(task, event)"
-                class="task-font">{{task.taskData.title}}
-              --
-              {{task.taskData.points}} points</li></label>
+                class="task-font">{{task.taskData.title}} -- {{task.taskData.points}} points</li></label>
           </ul>
         </div>
       </div>
     </div>
-    <div class="row">
-      <ProgressBar />
-    </div>
-
   </div>
 </template>
 
