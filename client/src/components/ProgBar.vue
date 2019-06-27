@@ -1,5 +1,5 @@
 <template>
-  <div class="p-bar ">
+  <div class="p-bar">
     <h1>Progress Bar</h1>
     <div class="progress vertical">
       <div class="progress-bar" role="progressbar" :style="{height: value+'%'}"></div>
@@ -30,12 +30,12 @@
   .progress {
     transform: scaleY(-1);
     overflow: visible;
-    background-color: transparent;
+    /* background-color: transparent; */
     /* bg-transparent makes bar see-through for stacking multiple users on top of each other when making teams*/
   }
 
   .progress-bar {
-    background-color: transparent;
+    /* background-color: transparent; */
     /* bg-transparent makes bar see-through for stacking multiple users on top of each other when making teams*/
 
   }
