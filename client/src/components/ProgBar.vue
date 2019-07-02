@@ -2,8 +2,8 @@
   <div class="p-bar">
     <h1>Progress Bar</h1>
     <div class="progress vertical">
-      <div class="progress-bar" role="progressbar" :style="{height: value+'%'}"></div>
-      <span class="climber" data-toggle="tooltip" data-placement="left" :title='value'></span>
+      <div class="progress-bar" role="progressbar" :style="{height: userProgress+'%'}"></div>
+      <span class="climber" data-toggle="tooltip" data-placement="left" :title="userProgress+ '%'"></span>
     </div>
   </div>
 </template>
@@ -14,19 +14,24 @@
     props: [],
     mounted() {
       $('[data-toggle="tooltip"]').tooltip({ trigger: 'manual' }).tooltip('show')
+      //where floating tooltip comes from tooltip.show
     },
     data() {
       return {
-        value: 55
+        value: 0.75
       }
     },
-    computed: {},
+    computed: {
+      userProgress() {
+        return Math.floor(this.$store.state.user.points / this.$store.state.summitThreshold * 100)
+      }
+    },
     methods: {},
     components: {}
   }
 </script>
 
-<style scoped>
+<style>
   .progress {
     transform: scaleY(-1);
     overflow: visible;
@@ -48,11 +53,12 @@
   }
 
   .tooltip>.tooltip-inner {
-    background-color: pink !important;
+    background-color: pink;
     padding: 5px 15px;
   }
 
+  /* 
   .climber+.tooltip>.tooltip-arrow {
-    /* styling for arrow here */
-  }
+    styling for arrow here
+  } */
 </style>

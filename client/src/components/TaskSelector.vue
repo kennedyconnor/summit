@@ -58,7 +58,7 @@
     components: {}
   }
 </script>
-<style scoped>
+<style>
   .taskSelector {
     list-style-type: none;
   }

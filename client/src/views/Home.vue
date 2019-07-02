@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row home">
-      <img class="background" alt="Summit Mountain" src="../assets/mountain2.png">
+      <img class="background-image" alt="Summit Mountain" src="../assets/mountain2.png">
       <div class="col-12 d-flex justify-content-between">
         <div>
           <ProgressBar />
@@ -85,7 +85,8 @@
 </script>
 
 <style>
-  img {
+  .background-image {
+    display: flex;
     background-size: cover;
     background-repeat: no-repeat;
     height: 95%;

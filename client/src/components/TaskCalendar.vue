@@ -55,6 +55,7 @@
   .calendar-view {
     display: grid;
     grid-template: "mon tue wed thu fri sat sun";
+    /* grid-template: "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"; */
     grid-template-columns: auto;
   }
 

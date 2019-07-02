@@ -1,6 +1,7 @@
 <template>
   <div class="profile">
-    <h2>My Profile</h2>
+    <h2 style="color: #346575; font-family: 'Rock Salt', cursive;">My Profile
+    </h2>
     <UserInfo />
     <TaskCalendar />
   </div>
@@ -27,9 +28,3 @@
     }
   }
 </script>
-<style>
-  h2 {
-    font-family: 'Rock Salt', cursive;
-    color: #346575;
-  }
-</style>

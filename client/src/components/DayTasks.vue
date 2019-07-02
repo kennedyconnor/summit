@@ -1,5 +1,5 @@
 <template>
-  <div class=" border">
+  <div class="border" :class="day">
     <h3 style="padding-top: 10px; padding-bottom: 0px;">{{day}}</h3>
     <hr style="padding: 0px;">
     <div v-for="task in instances" class="d-flex text-nowrap auto task" :class="task.taskData.tags[0]">

@@ -14,13 +14,14 @@
             <router-link class="router-link-style" to="/profile"><b>My Profile</b><br></router-link>
             <div class="dropdown-divider" style="margin: 0;"></div>
             <a class="dropdown-item log-out"
-              style="background-color: #528A9D; color: white; cursor: pointer; font-family: 'Rock Salt', cursive;"
+              style="background-color: #346575; color: white; cursor: pointer; font-family: 'Rock Salt', cursive;"
               @click="logout">Log
               Out</a>
           </div>
         </div>
         <div class="header-title col-sm-4 d-flex align-items-center">
-          <h2>Summit</h2>
+          <h2 style="font-family: 'Rock Salt', cursive; color: #346575;
+">Summit</h2>
         </div>
       </div>
     </div>
