@@ -23,11 +23,11 @@
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                   placeholder="Enter Team Name" v-model="newTeam.name">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="exampleInputPassword1">Add Teammate</label>
                 <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Enter Teammate's Email"
                   v-model="email" @click="addUser()">
-              </div>
+              </div> -->
               <!-- <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -62,18 +62,10 @@
         return this.$store.state.user
       }
     },
-
     methods: {
-
-      addUser() {
-        this.newTeam.users.push(this.email)
-        this.email = ""
-      },
-
       createTeam() {
-        this.newTeam.users.push(this.user.email)
+        this.newTeam.users.push(this.user._id)
         this.$store.dispatch("createNewTeam", this.newTeam)
-
       }
     }
   }

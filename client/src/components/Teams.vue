@@ -1,18 +1,25 @@
 <template>
   <div class="teams">
-    teams
+    <div class="col">
+      <teamCard v-for="team in teams" :team="team" />
+    </div>
   </div>
 </template>
 
 <script>
+  import TeamCard from "@/components/TeamCard.vue"
   export default {
     name: "teams",
-    props: [],
-    data() {
-      return {}
+    mounted() {
+      this.$store.dispatch("getTeamsByUserId", this.$store.state.user._id)
     },
-    computed: {},
-    methods: {},
-    components: {}
+    computed: {
+      teams() {
+        return this.$store.state.teams
+      }
+    },
+    components: {
+      TeamCard
+    }
   }
 </script>

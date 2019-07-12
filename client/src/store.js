@@ -257,8 +257,8 @@ export default new Vuex.Store({
     async createNewTeam({ commit, dispatch }, newTeam) {
       try {
         console.log(newTeam)
-        let userId = await dispatch("getUserIdByEmail", { email: newTeam.users[1] })
-        newTeam.users = [userId]
+        // let userId = await dispatch("getUserIdByEmail", { email: newTeam.users[1] })
+        // newTeam.users = [userId]
         await api.post('/teams', newTeam)
         dispatch("getTeamsByUserId", this.state.user._id)
       } catch (error) { console.error(error) }
@@ -268,7 +268,30 @@ export default new Vuex.Store({
       try {
         let res = await api.get('/teams/user/' + userId)
         console.log("getting teams", res.data)
-        dispatch("setTeams", res.data)
+        commit("setTeams", res.data)
+      } catch (error) { console.error(error) }
+    },
+
+    async addTeamMember({ commit, dispatch }, payload) {
+      try {
+        let userId = await dispatch("getUserIdByEmail", { email: payload.users[payload.users.length - 1] })
+        payload.users.pop()
+        payload.users.push(userId)
+        dispatch("editTeam", payload)
+      } catch (error) { console.error(error) }
+    },
+
+    async editTeam({ commit, dispatch }, payload) {
+      try {
+        await api.put('/teams/' + payload._id, payload)
+        dispatch("getTeamsByUserId", this.state.user._id)
+      } catch (error) { console.error(error) }
+    },
+
+    async deleteTeam({ commit, dispatch }, payload) {
+      try {
+        await api.delete('/teams/' + payload._id, payload)
+        dispatch("getTeamsByUserId", this.state.user._id)
       } catch (error) { console.error(error) }
     }
     //#endregion
