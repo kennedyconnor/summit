@@ -28,6 +28,7 @@ export default new Vuex.Store({
     userTasks: [],
     pendingUserTasks: {},  //or emit an event- child calling parent
     tags: ["Health", "Organization", "Hygiene", "Finances"], //may move the tags in store.state into data if it is only referenced by the tasks component
+    teams: [],
   },
   mutations: {
     setUser(state, user) {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     emptyPendingUserTasks(state) {
       // debugger
       state.pendingUserTasks = {}
+    },
+    setTeams(state, teams) {
+      state.teams = teams;
     }
   },
 
@@ -243,8 +247,26 @@ export default new Vuex.Store({
         await api.put('/usertasks/' + usertask._id, usertask)
         //dispatch('getUserTasksByUserId', usertask.userId._id)
       } catch (error) { console.error(error) }
-    }
+    },
 
+    //#endregion
+
+
+    //#region - teams
+    async createNewTeam({ commit, dispatch }, newTeam) {
+      try {
+        await api.post('/teams', newTeam)
+        dispatch("getTeamsByUserId", this.state.user._id)
+      } catch (error) { console.error(error) }
+    },
+
+    async getTeamsByUserId({ commit, dispatch }, userId) {
+      try {
+        let res = await api.get('/teams/user/' + userId)
+        console.log("getting teams", res.data)
+        dispatch("setTeams", res.data)
+      } catch (error) { console.error(error) }
+    }
     //#endregion
   }
 

@@ -20,13 +20,13 @@
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Team Name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                   placeholder="Enter Team Name">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Add Teammate</label>
-                <input type="password" class="form-control" id="exampleInputPassword1"
-                  placeholder="Enter Teammate's Email">
+                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Enter Teammate's Email"
+                  v-model="email" @click="addUser()">
               </div>
               <!-- <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -36,7 +36,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Create Team</button> </div>
+            <button type="submit" class="btn btn-primary" @click="createTeam()">Create Team</button> </div>
         </div>
       </div>
     </div>
@@ -45,6 +45,35 @@
 
 <script>
   export default {
+    name: "createTeam",
+    props: [],
+    data() {
+      return {
+        newTeam: {
+          name: "",
+          users: [],
+        },
+        email: "",
+      }
+    },
 
+    computed: {
+      user() {
+        return this.$store.state.user
+      }
+    },
+
+    methods: {
+
+      addUser() {
+        this.newTeam.users.push(this.email)
+        this.email = ""
+      },
+
+      createTeam() {
+        this.newTeam.users.push(this.user.email)
+        this.$store.dispatch("createNewTeam", this.newTeam)
+      }
+    }
   }
 </script>
