@@ -12,14 +12,20 @@
 </template>
 
 <script>
+  import Teams from "@/components/Teams.vue"
+  import CreateTeam from "@/components/CreateTeam.vue"
+
   export default {
-    name: "",
+    name: "Team",
     props: [],
     data() {
       return {}
     },
     computed: {},
     methods: {},
-    components: {}
+    components: {
+      Teams,
+      CreateTeam
+    }
   }
 </script>
