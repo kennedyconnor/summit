@@ -11,6 +11,7 @@ export default class TeamController {
       .use(Authorize.authenticated)
       .get('', this.getAllTeams)
       .get('/:id', this.getTeamById)
+      .get('/user/:id', this.getTeamsByUserId)
       .post('', this.createTeam)
       .put('/:id', this.editTeam) //double check this
       .delete('/:id', this.deleteTeam)
@@ -33,6 +34,14 @@ export default class TeamController {
       let data = await _repo.find({ _id: req.params.id })
         .populate({ path: 'users', select: 'name' })
       return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async getTeamsByUserId(req, res, next) {
+    try {
+      let data = await _repo.find({ users: { $in: [req.session.uid] } })
+        .populate("users")
+      res.send(data)
     } catch (error) { next(error) }
   }
 

@@ -5,6 +5,7 @@ let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 
 let _schema = new mongoose.Schema({
+  name: {type: String, required: true, default: "My Team" },
   users: [{ type: ObjectId, ref: 'User' }]
 })
 
