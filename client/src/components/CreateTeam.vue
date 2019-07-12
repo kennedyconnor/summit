@@ -21,7 +21,7 @@
               <div class="form-group">
                 <label for="exampleInputEmail1">Team Name</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                  placeholder="Enter Team Name">
+                  placeholder="Enter Team Name" v-model="newTeam.name">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Add Teammate</label>
@@ -73,6 +73,7 @@
       createTeam() {
         this.newTeam.users.push(this.user.email)
         this.$store.dispatch("createNewTeam", this.newTeam)
+
       }
     }
   }

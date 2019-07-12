@@ -97,10 +97,11 @@ export default new Vuex.Store({
       router.push({ name: 'login' })
     },
 
-    async getUserByEmail({ commit, dispatch }, payload) {
+    async getUserIdByEmail({ commit, dispatch }, payload) {
       try {
         let res = await auth.get(payload.email)
-        console.log('got User by email:', res.data)
+        // console.log('got User by email:', res.data)
+        return res.data._id
       } catch (error) { console.error(error) }
     },
 
@@ -255,6 +256,9 @@ export default new Vuex.Store({
     //#region - teams
     async createNewTeam({ commit, dispatch }, newTeam) {
       try {
+        console.log(newTeam)
+        let userId = await dispatch("getUserIdByEmail", { email: newTeam.users[1] })
+        newTeam.users = [userId]
         await api.post('/teams', newTeam)
         dispatch("getTeamsByUserId", this.state.user._id)
       } catch (error) { console.error(error) }

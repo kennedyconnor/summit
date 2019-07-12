@@ -13,7 +13,7 @@ export default class AuthController {
       .use(Authorize.authenticated)
       .get('', this.getAllUsers)
       .get('/authenticate', this.authenticate)
-      .get('/:id', this.getUserByEmail)
+      .get('/:email', this.getUserByEmail)
       .put('/:id', this.editUser)
       .delete('/logout', this.logout)
       .use(this.defaultRoute)
@@ -93,7 +93,7 @@ export default class AuthController {
 
   async getUserByEmail(req, res, next) {
     try {
-      let user = await _repo.find({ email: req.params.id })
+      let user = await _repo.findOne({ email: req.params.email })
       return res.send(user)
     } catch (error) {
       console.error(error)
