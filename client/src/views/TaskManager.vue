@@ -36,5 +36,6 @@
   h1 {
     font-family: 'Rock Salt', cursive;
     color: #346575;
+
   }
 </style>
