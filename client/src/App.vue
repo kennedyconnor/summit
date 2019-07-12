@@ -12,6 +12,7 @@
             <router-link class="router-link-style" to="/"><b>Home</b><br></router-link>
             <router-link class="router-link-style" to="/task-manager"><b>Task Manager</b><br></router-link>
             <router-link class="router-link-style" to="/profile"><b>My Profile</b><br></router-link>
+            <router-link class="router-link-style" to="/team"><b>My Teams</b></router-link>
             <div class="dropdown-divider" style="margin: 0;"></div>
             <a class="dropdown-item log-out"
               style="background-color: #346575; color: white; cursor: pointer; font-family: 'Rock Salt', cursive;"
