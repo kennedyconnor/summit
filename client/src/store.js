@@ -293,7 +293,8 @@ export default new Vuex.Store({
         await api.delete('/teams/' + payload._id, payload)
         dispatch("getTeamsByUserId", this.state.user._id)
       } catch (error) { console.error(error) }
-    }
+    },
+
     //#endregion
   }
 

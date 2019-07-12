@@ -37,6 +37,9 @@
           .attr('data-original-title', value + '%')
           // .tooltip('fixTitle')
           .tooltip('show')
+        if (value >= 100) {
+          value = 100;
+        }
         return value
       }
     },
